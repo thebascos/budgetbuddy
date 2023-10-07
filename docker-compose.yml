@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: bb_postgres
+    image: postgres:13
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=bb
+      - POSTGRES_PASSWORD=budgetbuddy
+      - POSTGRES_DB=bb
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - postgres
+
+  pgadmin:
+    links:
+      - postgres:postgres
+    container_name: bb_pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    volumes:
+      - pg_admin_data:/root/.pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=bb@bb.com
+      - PGADMIN_DEFAULT_PASSWORD=budgetbuddy
+    networks:
+      - postgres
+
+volumes:
+  pg_data:
+  pg_admin_data:
+
+networks:
+  postgres:
+    driver: bridge
