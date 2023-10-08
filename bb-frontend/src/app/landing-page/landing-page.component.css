@@ -1,0 +1,28 @@
+/* Header styles */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling if necessary */
+}
+.header {
+  height: 100vh;
+  color: #3498db;
+  display: flex;
+}
+.logo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+.auth p {
+  margin: 0; /* Remove default margin for <p> elements */
+  align-self: center; /* Center only the "or" element horizontally */
+}

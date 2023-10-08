@@ -1,0 +1,39 @@
+/* Style for the login form */
+.log-in {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for the form groups (label + input) */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  align-items: center; /* Left-align label and input */
+  margin-bottom: 10px; /* Add spacing between form groups */
+}
+
+/* Style for inputs */
+input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style for the "Log In" button */
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 50%;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for the error message */
+.error-message {
+  color: red;
+  margin-top: 10px; /* Add spacing between error message and button */
+}
