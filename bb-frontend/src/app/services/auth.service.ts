@@ -1,6 +1,10 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { LogInDTO, SignUpDTO } from '../dtos/auth.dto';
 
 @Injectable({
@@ -30,5 +34,26 @@ export class AuthService {
         return response.access_token;
       })
     );
+  }
+
+  logoutUser$(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.post<any>(`${this.url}/auth/logout`, null, {
+      headers,
+    });
+  }
+
+  getUserProfile(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.get<any>(`${this.url}/auth/profile`, { headers });
   }
 }

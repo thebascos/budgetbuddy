@@ -8,6 +8,13 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeContainerComponent } from './home-container/home-container.component';
+import { HomePageComponent } from './home-container/home-page/home-page.component';
+import { DashboardComponent } from './home-container/dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,12 +22,19 @@ import { HttpClientModule } from '@angular/common/http';
     SignupComponent,
     LandingPageComponent,
     LoginComponent,
+    HomeContainerComponent,
+    HomePageComponent,
+    DashboardComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatIconModule,
+    MatTooltipModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,21 @@
+<div class="user-container">
+  <div class="user-info">
+    <span>
+      <mat-icon>person</mat-icon>
+      <strong> {{ user?.name }} </strong>
+    </span>
+  </div>
+  <div class="settings-logout">
+    <span>
+      <mat-icon
+        matTooltip="Settings"
+        aria-label="settings"
+        style="margin-right: 10px"
+        >settings</mat-icon
+      >
+      <mat-icon matTooltip="Logout" aria-label="Logout" (click)="logOut()"
+        >exit_to_app</mat-icon
+      >
+    </span>
+  </div>
+</div>
