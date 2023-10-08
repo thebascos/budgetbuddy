@@ -1,0 +1,34 @@
+/* Style for the navigation links */
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list li {
+  margin-bottom: 10px; /* Add spacing between the links */
+}
+
+.nav-list a {
+  text-decoration: none; /* Remove underline from links */
+  font-size: 20px; /* Increase text size (adjust as needed) */
+  font-family: Arial, sans-serif; /* Use Arial and sans-serif font stack */
+  color: black; /* Set link color to blue  */
+}
+
+.nav-list a.active-link {
+  font-weight: bold; /* Highlight the active link by making it bold */
+  color: #2980b9; /* Change link color on hover (optional) */
+}
+
+.nav-list a:hover {
+  color: #2980b9; /* Change link color on hover (optional) */
+}
+.footer {
+  margin-top: 31rem;
+}
+
+/* Style for the user profile component within the footer */
+.user-profile {
+  font-size: 14px; /* Adjust the font size for the user profile component */
+  color: #333; /* Set the text color */
+}

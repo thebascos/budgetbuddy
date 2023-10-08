@@ -1,0 +1,19 @@
+/* Style for the flex container */
+.flex-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Style for the app-homepage component */
+.app-homepage {
+  flex: 30%; /* Set the width of homepage to 30% */
+  background-color: #f5f5f5; /* Set background color for homepage (lighter) */
+  padding: 20px; /* Add padding for spacing (adjust as needed) */
+}
+
+/* Style for the router-outlet */
+.router-outlet {
+  flex: 70%; /* Set the width of router-outlet to 70% */
+  background-color: #ffffff; /* Set background color for router-outlet (darker) */
+  padding: 20px; /* Add padding for spacing (adjust as needed) */
+}

@@ -31,7 +31,7 @@ export class LoginComponent {
           if (token) {
             localStorage.setItem('token', token);
             this.loginForm.reset();
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/home']);
             console.log('sucess');
           }
         },

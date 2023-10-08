@@ -44,7 +44,7 @@ export class SignupComponent {
             localStorage.setItem('token', token);
             this.signUpForm.reset();
             console.log('success sign up');
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/home']);
           }
         },
         (errorResponse) => {

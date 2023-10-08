@@ -1,0 +1,23 @@
+/* CSS to arrange elements in one line */
+.user-container {
+  display: flex;
+  align-items: center; /* Vertically center align elements */
+}
+
+.user-info {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  flex: 1; /* Make user-info take available space */
+  display: flex;
+  align-items: center; /* Vertically center align elements within user-info */
+}
+
+.settings-logout {
+  display: flex;
+  gap: 5px; /* Add 5px gap between settings and logout icons */
+}
+
+/* Adjust icon size if needed */
+mat-icon {
+  font-size: 20px; /* Example font size */
+}

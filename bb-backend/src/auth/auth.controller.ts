@@ -1,7 +1,15 @@
-import { Post, Body, Controller } from '@nestjs/common';
+import {
+  Post,
+  Body,
+  Controller,
+  UseGuards,
+  Get,
+  Request,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -22,5 +30,17 @@ export class AuthController {
     const user = await this.authservice.validateUser(loginDTO);
     const token = await this.authservice.generateToken(user);
     return token;
+  }
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/profile')
+  getUserInfo(@Request() req) {
+    const user = req.user;
+    return user;
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('logout')
+  async logout() {
+    return { message: 'Logout successful' };
   }
 }
