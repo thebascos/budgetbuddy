@@ -6,6 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { LogInDTO, SignUpDTO } from '../dtos/auth.dto';
+import { BudgetDTO } from '../dtos/budget.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +56,16 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.HttPClient.get<any>(`${this.url}/auth/profile`, { headers });
+  }
+
+  public createBudget$(budgetData: BudgetDTO) {
+    return this.HttPClient.post<{ access_token: string }>(
+      `${this.url}/auth/create-budget`,
+      budgetData
+    ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 }

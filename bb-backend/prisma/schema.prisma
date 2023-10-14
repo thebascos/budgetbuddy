@@ -25,9 +25,8 @@ model Budget {
   id           String   @id @default(uuid())
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  name         String
-  description  String @unique
-  amount       String
+  description  String
+  amount       Float
   userId       String
   user         User @relation(fields: [userId], references: [id])
 }

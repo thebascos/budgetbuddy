@@ -15,6 +15,7 @@ import { UserComponent } from './user/user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BudgetComponent } from './budget/budget.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomePageComponent,
     DashboardComponent,
     UserComponent,
+    BudgetComponent,
   ],
   imports: [
     BrowserModule,
