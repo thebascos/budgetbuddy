@@ -17,4 +17,18 @@ model User {
   name                      String
   email                     String @unique
   password                  String
+  budgets                   Budget[]
 }
+
+
+model Budget {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  name         String
+  description  String @unique
+  amount       String
+  userId       String
+  user         User @relation(fields: [userId], references: [id])
+}
+
