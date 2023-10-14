@@ -9,6 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
+import { BudgetDTO } from 'src/dtos/budget.dto';
 
 @Injectable()
 export class AuthService {
@@ -67,6 +68,21 @@ export class AuthService {
       return existingUser;
     } else {
       throw new UnauthorizedException('Wrong password!');
+    }
+  }
+
+  async createBudget(budget: BudgetDTO, userId: 'sfdsdfsdfsd'): Promise<any> {
+    try {
+      const newBudget = await this.prisma.budget.create({
+        data: {
+          description: budget.description,
+          amount: budget.amount,
+          userId: userId,
+        },
+      });
+      return newBudget;
+    } catch (error) {
+      throw new Error('error siya kay bogo ka');
     }
   }
 }

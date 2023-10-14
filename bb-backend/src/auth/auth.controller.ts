@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { BudgetDTO } from 'src/dtos/budget.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -42,5 +43,11 @@ export class AuthController {
   @Post('logout')
   async logout() {
     return { message: 'Logout successful' };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-budget')
+  createTicket(@Body() budgetData: BudgetDTO, @Request() req) {
+    return this.authservice.createBudget(budgetData, req.user.id);
   }
 }
