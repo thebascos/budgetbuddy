@@ -1,44 +1,46 @@
-<div>
+<div class="parent-container">
   <div>
-    <div></div>
+    <div>
+      <div></div>
+    </div>
+    <div>
+      <ul class="nav-list">
+        <!-- Dashboard Link -->
+        <div>
+          <li>
+            <a [routerLink]="['/home/dashboard']" routerLinkActive="active-link"
+              >Dashboard</a
+            >
+          </li>
+        </div>
+        <!-- Budgets Link -->
+        <div>
+          <li>
+            <a [routerLink]="['/home/budget']" routerLinkActive="active-link"
+              >Budgets</a
+            >
+          </li>
+        </div>
+        <!-- Events Link -->
+        <div>
+          <li>
+            <a [routerLink]="['/home/events']" routerLinkActive="active-link"
+              >Events</a
+            >
+          </li>
+        </div>
+        <!-- Bills Link -->
+        <div>
+          <li>
+            <a [routerLink]="['/home/bills']" routerLinkActive="active-link"
+              >Bills</a
+            >
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
-  <div>
-    <ul class="nav-list">
-      <!-- Dashboard Link -->
-      <div>
-        <li>
-          <a [routerLink]="['/home/dashboard']" routerLinkActive="active-link"
-            >Dashboard</a
-          >
-        </li>
-      </div>
-      <!-- Budgets Link -->
-      <div>
-        <li>
-          <a [routerLink]="['/home/budgets']" routerLinkActive="active-link"
-            >Budgets</a
-          >
-        </li>
-      </div>
-      <!-- Events Link -->
-      <div>
-        <li>
-          <a [routerLink]="['/home/events']" routerLinkActive="active-link"
-            >Events</a
-          >
-        </li>
-      </div>
-      <!-- Bills Link -->
-      <div>
-        <li>
-          <a [routerLink]="['/home/bills']" routerLinkActive="active-link"
-            >Bills</a
-          >
-        </li>
-      </div>
-    </ul>
-  </div>
-  <!-- User Profile Component in the Footer -->
+
   <div class="footer">
     <app-user class="user-profile"></app-user>
   </div>

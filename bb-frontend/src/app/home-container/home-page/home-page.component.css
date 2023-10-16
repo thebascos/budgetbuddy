@@ -1,4 +1,11 @@
 /* Style for the navigation links */
+
+.parent-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .nav-list {
   list-style: none;
   padding: 0;
@@ -23,12 +30,7 @@
 .nav-list a:hover {
   color: #2980b9; /* Change link color on hover (optional) */
 }
-.footer {
-  margin-top: 31rem;
-}
 
 /* Style for the user profile component within the footer */
 .user-profile {
-  font-size: 14px; /* Adjust the font size for the user profile component */
-  color: #333; /* Set the text color */
 }

@@ -50,4 +50,10 @@ export class AuthController {
   createTicket(@Body() budgetData: BudgetDTO, @Request() req) {
     return this.authservice.createBudget(budgetData, req.user.id);
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/budgets')
+  async getTickets(@Request() req) {
+    return await this.authservice.getBudgets(req.user.id);
+  }
 }

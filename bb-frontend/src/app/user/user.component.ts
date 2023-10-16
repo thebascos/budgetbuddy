@@ -19,9 +19,16 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sharedService.getUserProfile().subscribe((user) => {
-      this.user = user;
-    });
+    this.sharedService.getUserProfile().subscribe(
+      (user) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Error fetching user profile:', error);
+
+        this.router.navigate(['/']);
+      }
+    );
   }
 
   logOut() {
