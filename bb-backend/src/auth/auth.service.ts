@@ -85,4 +85,20 @@ export class AuthService {
       throw new Error('error siya kay bogo ka');
     }
   }
+
+  async getBudgets(userId: string) {
+    try {
+      const budgets = await this.prisma.budget.findMany({
+        include: {
+          user: true,
+        },
+        where: {
+          userId: userId,
+        },
+      });
+      return budgets;
+    } catch (error) {
+      throw new Error('Error in fetching budgets');
+    }
+  }
 }

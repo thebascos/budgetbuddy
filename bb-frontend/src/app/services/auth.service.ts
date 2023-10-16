@@ -59,13 +59,23 @@ export class AuthService {
   }
 
   public createBudget$(budgetData: BudgetDTO) {
-    return this.HttPClient.post<{ access_token: string }>(
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(
       `${this.url}/auth/create-budget`,
-      budgetData
-    ).pipe(
-      map((response) => {
-        return response;
-      })
+      budgetData,
+      {
+        headers,
+      }
     );
+  }
+
+  getBudgets(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.get<any>(`${this.url}/auth/budgets`, { headers });
   }
 }

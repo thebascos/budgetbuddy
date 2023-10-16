@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BudgetComponent } from './budget/budget.component';
+import { CreateBudgetComponent } from './budget/create-budget/create-budget.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { BudgetComponent } from './budget/budget.component';
     DashboardComponent,
     UserComponent,
     BudgetComponent,
+    CreateBudgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import { BudgetComponent } from './budget/budget.component';
     MatIconModule,
     MatTooltipModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
