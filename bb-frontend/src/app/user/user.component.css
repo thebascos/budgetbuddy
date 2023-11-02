@@ -21,3 +21,27 @@
 mat-icon {
   font-size: 20px; /* Example font size */
 }
+/* Style for the circular user profile */
+.user-avatar {
+  width: 48px; /* Set the desired width and height for the circular icon */
+  height: 48px;
+  border-radius: 50%; /* Make it circular */
+  background-color: #2980b9; /* Set a background color or background image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Text color inside the circular icon */
+  font-weight: bold; /* Font weight for the content */
+}
+
+.avatar-content {
+  font-size: 24px; /* Adjust the font size of the content */
+}
+.user-details {
+  display: flex;
+}
+.user-name {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}

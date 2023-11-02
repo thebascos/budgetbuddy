@@ -1,0 +1,24 @@
+.dashboard-header {
+  width: auto; /* Allow it to take the necessary width */
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+.dashboard-header app-user {
+  margin-left: auto; /* Push app-user to the right by using auto margin on the left side */
+}
+
+.dashboard-content {
+  margin-top: 50px;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  justify-items: center; /* Center horizontally within each cell */
+  align-items: center; /* Center vertically within each cell */
+}
+
+.dashboard-content div {
+  width: 500px;
+  height: 250px;
+  background-color: #f0f0f0;
+  border-radius: 25px;
+}

@@ -10,16 +10,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeContainerComponent } from './home-container/home-container.component';
 import { HomePageComponent } from './home-container/home-page/home-page.component';
-import { DashboardComponent } from './home-container/dashboard/dashboard.component';
+import { DashboardComponent } from './home-container/home-page/dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BudgetComponent } from './budget/budget.component';
-import { CreateBudgetComponent } from './budget/create-budget/create-budget.component';
+import { BudgetComponent } from './home-container/home-page/budget/budget.component';
+import { CreateBudgetComponent } from './home-container/home-page/budget/create-budget/create-budget.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ExpenseComponent } from './home-container/home-page/expense/expense.component';
+import { CreateExpenseComponent } from './home-container/home-page/expense/create-expense/create-expense.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +39,9 @@ import { MatCardModule } from '@angular/material/card';
     UserComponent,
     BudgetComponent,
     CreateBudgetComponent,
+    FileUploadComponent,
+    ExpenseComponent,
+    CreateExpenseComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +53,11 @@ import { MatCardModule } from '@angular/material/card';
     BrowserAnimationsModule,
     MatDialogModule,
     MatCardModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -29,5 +29,17 @@ model Budget {
   amount       Float
   userId       String
   user         User @relation(fields: [userId], references: [id])
+  expenses                  Expense[]
+}
+
+model Expense {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  description  String
+  amount       Float
+  attachment   String? // Field to store the attachment file path or URL
+  budgetId     String
+  budget       Budget   @relation(fields: [budgetId], references: [id])
 }
 

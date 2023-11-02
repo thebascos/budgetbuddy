@@ -30,8 +30,8 @@ export class CreateBudgetComponent {
     if (this.budgetForm.valid) {
       const budgetData = this.budgetForm.value;
       this.authService.createBudget$(budgetData).subscribe(() => {
-        this.authService.getBudgets().subscribe(() => {
-          this.sharedService.updateBudgets(budgetData);
+        this.authService.getBudgets().subscribe((budgets) => {
+          this.sharedService.updateBudgets(budgets);
         });
         this.budgetForm.reset();
         this.dialogRef.close();

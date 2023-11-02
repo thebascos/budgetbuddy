@@ -1,5 +1,15 @@
 /* Style for the navigation links */
-
+.homepage-heading {
+  width: 100%;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: flex-start; /* Center horizontally */
+}
+.homepage-heading h2 {
+  color: #2980b9;
+  font-size: 27px;
+  font-family: Arial, sans-serif;
+}
 .parent-container {
   height: 100%;
   display: flex;
@@ -19,7 +29,13 @@
   text-decoration: none; /* Remove underline from links */
   font-size: 20px; /* Increase text size (adjust as needed) */
   font-family: Arial, sans-serif; /* Use Arial and sans-serif font stack */
-  color: black; /* Set link color to blue  */
+  color: gray; /* Set link color to blue  */
+  display: flex; /* Add Flexbox to arrange icon and text horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.nav-list a mat-icon {
+  margin-right: 20px; /* Add space between icon and text */
 }
 
 .nav-list a.active-link {
@@ -32,5 +48,3 @@
 }
 
 /* Style for the user profile component within the footer */
-.user-profile {
-}

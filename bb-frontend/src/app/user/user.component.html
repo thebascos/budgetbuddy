@@ -1,21 +1,24 @@
 <div class="user-container">
   <div class="user-info">
-    <span>
-      <mat-icon>person</mat-icon>
-      <strong> {{ user?.name }} </strong>
-    </span>
-  </div>
-  <div class="settings-logout">
-    <span>
-      <mat-icon
-        matTooltip="Settings"
-        aria-label="settings"
-        style="margin-right: 10px"
-        >settings</mat-icon
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item (click)="logOut()">Logout</button>
+    </mat-menu>
+
+    <div class="user-details">
+      <div class="user-name">
+        <strong> {{ user?.name }} </strong>
+      </div>
+      <div
+        [matMenuTriggerFor]="userMenu"
+        aria-label="User Menu"
+        style="cursor: pointer"
+        class="user-avatar"
       >
-      <mat-icon matTooltip="Logout" aria-label="Logout" (click)="logOut()"
-        >exit_to_app</mat-icon
-      >
-    </span>
+        <div class="avatar-content">
+          {{ user?.name?.charAt(0)?.toUpperCase() }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
