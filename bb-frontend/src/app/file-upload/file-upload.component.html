@@ -1,0 +1,32 @@
+<div class="file-upload">
+  {{ fileName || "No file uploaded yet." }}
+
+  <button
+    mat-mini-fab
+    color="primary"
+    class="upload-btn"
+    (click)="fileUpload.click()"
+  >
+    <mat-icon>attach_file</mat-icon>
+  </button>
+
+  <input
+    type="file"
+    #fileUpload
+    style="display: none"
+    (change)="onFileSelected($event)"
+    accept=".jpg, .jpeg, .png, .pdf"
+  />
+
+  <button mat-raised-button (click)="onSubmit()">Upload</button>
+
+  <div *ngIf="uploadProgress !== null" class="progress-indicator">
+    <mat-progress-bar
+      mode="determinate"
+      [value]="uploadProgress"
+    ></mat-progress-bar>
+    <button mat-button color="warn" (click)="cancelUpload()">
+      Cancel Upload
+    </button>
+  </div>
+</div>

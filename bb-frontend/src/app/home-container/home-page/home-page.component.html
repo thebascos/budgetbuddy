@@ -1,47 +1,72 @@
 <div class="parent-container">
   <div>
-    <div>
-      <div></div>
+    <div class="homepage-heading">
+      <img src="./assets/images/bb.png" style="height: 150px" />
+      <h2>Budget Buddy</h2>
     </div>
     <div>
       <ul class="nav-list">
-        <!-- Dashboard Link -->
+        <!-- Dashboard Link with MatIcon -->
         <div>
           <li>
-            <a [routerLink]="['/home/dashboard']" routerLinkActive="active-link"
-              >Dashboard</a
+            <a
+              [routerLink]="['/home/dashboard']"
+              routerLinkActive="active-link"
             >
+              <mat-icon>dashboard</mat-icon>
+              Dashboard
+            </a>
           </li>
         </div>
-        <!-- Budgets Link -->
+        <!-- Income Link with MatIcon -->
         <div>
           <li>
-            <a [routerLink]="['/home/budget']" routerLinkActive="active-link"
-              >Budgets</a
-            >
+            <a [routerLink]="['/home/income']" routerLinkActive="active-link">
+              <mat-icon>monetization_on</mat-icon>
+              Income
+            </a>
           </li>
         </div>
-        <!-- Events Link -->
+        <!-- Budgets Link with MatIcon -->
         <div>
           <li>
-            <a [routerLink]="['/home/events']" routerLinkActive="active-link"
-              >Events</a
-            >
+            <a [routerLink]="['/home/budget']" routerLinkActive="active-link">
+              <mat-icon>account_balance_wallet</mat-icon>
+              Budgets
+            </a>
           </li>
         </div>
-        <!-- Bills Link -->
+        <!-- Expenses Link with MatIcon -->
         <div>
           <li>
-            <a [routerLink]="['/home/bills']" routerLinkActive="active-link"
-              >Bills</a
+            <a [routerLink]="['/home/expenses']" routerLinkActive="active-link">
+              <mat-icon>receipt</mat-icon>
+              Expenses
+            </a>
+          </li>
+        </div>
+        <!-- Savings Plan Link with MatIcon -->
+        <div>
+          <li>
+            <a
+              [routerLink]="['/home/savings-plan']"
+              routerLinkActive="active-link"
             >
+              <mat-icon>account_balance</mat-icon>
+              Savings Plan
+            </a>
+          </li>
+        </div>
+        <!-- Bills Link with MatIcon -->
+        <div>
+          <li>
+            <a [routerLink]="['/home/bills']" routerLinkActive="active-link">
+              <mat-icon>payment</mat-icon>
+              Bills
+            </a>
           </li>
         </div>
       </ul>
     </div>
-  </div>
-
-  <div class="footer">
-    <app-user class="user-profile"></app-user>
   </div>
 </div>

@@ -25,7 +25,6 @@ export class UserComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user profile:', error);
-
         this.router.navigate(['/']);
       }
     );
@@ -36,5 +35,10 @@ export class UserComponent implements OnInit {
       localStorage.removeItem('token');
       this.router.navigate(['/']);
     });
+  }
+
+  openSettings() {
+    // Implement your settings logic here
+    console.log('Settings clicked');
   }
 }

@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { BudgetDTO } from 'src/dtos/budget.dto';
+import { ExpenseDTO } from 'src/dtos/expense.dto';
 
 @Injectable()
 export class AuthService {
@@ -99,6 +100,22 @@ export class AuthService {
       return budgets;
     } catch (error) {
       throw new Error('Error in fetching budgets');
+    }
+  }
+
+  async createExpense(expenseData: ExpenseDTO): Promise<any> {
+    try {
+      const newExpense = await this.prisma.expense.create({
+        data: {
+          description: expenseData.description,
+          amount: expenseData.amount,
+          attachment: expenseData.attachment,
+          budgetId: expenseData.budgetId,
+        },
+      });
+      return newExpense;
+    } catch (error) {
+      throw error;
     }
   }
 }

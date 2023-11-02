@@ -5,12 +5,16 @@ import {
   UseGuards,
   Get,
   Request,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { BudgetDTO } from 'src/dtos/budget.dto';
+import { ExpenseDTO } from 'src/dtos/expense.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('auth')
 export class AuthController {
@@ -55,5 +59,27 @@ export class AuthController {
   @Get('/budgets')
   async getTickets(@Request() req) {
     return await this.authservice.getBudgets(req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-expense')
+  createExpense(@Body() expenseData: ExpenseDTO) {
+    return this.authservice.createExpense(expenseData);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('upload-file')
+  @UseInterceptors(FileInterceptor('file', { dest: 'images' }))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const baseUrl = 'http://localhost:3000';
+    const filePathWithoutImages = file.path.replace('images/', ''); // Remove 'images' from the path
+
+    const fileUrl = `${baseUrl}/${filePathWithoutImages}`;
+    console.log('Uploaded file:', file);
+    return {
+      message: 'File uploaded successfully',
+      fileUrl,
+      fileName: file.originalname,
+    };
   }
 }

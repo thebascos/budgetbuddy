@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBudgetComponent } from './create-budget/create-budget.component';
-import { AuthService } from '../services/auth.service';
-import { BudgetDTO } from '../dtos/budget.dto';
-import { SharedService } from '../services/shared.service';
+import { AuthService } from '../../../services/auth.service';
+import { BudgetDTO } from '../../../dtos/budget.dto';
+import { SharedService } from '../../../services/shared.service';
 
 @Component({
   selector: 'app-budget',
@@ -20,7 +20,7 @@ export class BudgetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getBudgets().subscribe((budgets) => {
+    this.sharedService.getBudgets().subscribe((budgets) => {
       this.budgets = budgets;
     });
   }
