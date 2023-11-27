@@ -25,4 +25,5 @@
 }
 .header app-user {
   margin-left: auto; /* Push app-user to the right by using auto margin on the left side */
+  margin-bottom: 5rem;
 }

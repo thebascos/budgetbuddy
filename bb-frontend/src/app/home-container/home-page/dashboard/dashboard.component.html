@@ -1,9 +1,27 @@
-<div>
-  <div class="dashboard-content">
-    <div class="income">income</div>
-    <div>expenses</div>
-    <div>savings plan</div>
-
-    <div>bills</div>
+<div class="dashboard-content">
+  <div class="category">
+    <h2>Expenses</h2>
+    <div class="pie-chart" *ngIf="budgets">
+      <app-pie-chart></app-pie-chart>
+    </div>
+    <p>
+      Total Expenses this Month:
+      {{ getTotalExpenses() | currency : "PHP" : "symbol" : "1.2-2" }}
+    </p>
+  </div>
+  <div class="category">
+    <h2>Savings Plan</h2>
+  </div>
+  <div class="category">
+    <h2>Bills</h2>
+    <div *ngFor="let bill of bills">
+      <div class="bill-item">
+        <label>
+          <input type="checkbox" [(ngModel)]="bill.isDue" />
+          {{ bill.description }}:
+          {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        </label>
+      </div>
+    </div>
   </div>
 </div>

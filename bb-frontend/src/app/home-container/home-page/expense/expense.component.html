@@ -1,1 +1,31 @@
-<p>expense works!</p>
+<div class="expense-button" style="text-align: right">
+  <button (click)="openCreateExpenseDialog()">Create Expense</button>
+</div>
+<div class="expense-container">
+  <div>
+    <div *ngFor="let budget of budgets">
+      <label>
+        <input
+          type="checkbox"
+          [checked]="selectedBudgets.includes(budget.id)"
+          (change)="toggleBudgetSelection(budget.id)"
+        />
+        {{ budget.description }}
+      </label>
+    </div>
+  </div>
+  <div class="card-container">
+    <mat-card
+      class="custom-card"
+      *ngFor="let expense of expenses | budgetFilter : selectedBudgets"
+    >
+      <mat-card-content>
+        <span> {{ expense.budget.description }}</span>
+        <h3>{{ expense.description }}</h3>
+        <p>
+          Amount: {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
