@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { Interaction } from 'chart.js';
+=======
+>>>>>>> 4d0372f (add expenses)
 import { BudgetDTO } from './budget.dto';
 
 export interface ExpenseDTO {
