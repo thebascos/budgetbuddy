@@ -7,7 +7,6 @@ import { CreateBillDTO } from 'src/app/dtos/bill.dto';
 import { AuthService } from 'src/app/services/auth.service';
 import { getDate, getMonth, getYear } from 'date-fns'; // Import the necessary functions from date-fns
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,7 +16,6 @@ export class DashboardComponent implements OnInit {
   budgets: BudgetDTO[] | undefined;
   totalExpensesByBudget: { [key: string]: number } = {};
   bills: CreateBillDTO[] | undefined;
-
 
   @ViewChild(PieChartComponent) pieChartComponent!: PieChartComponent;
 

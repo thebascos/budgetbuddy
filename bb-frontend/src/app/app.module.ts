@@ -59,7 +59,6 @@ import { CreateIncomeComponent } from './home-container/home-page/income/create-
     BillFilterPipe,
     IncomeComponent,
     CreateIncomeComponent,
-
   ],
   imports: [
     BrowserModule,
