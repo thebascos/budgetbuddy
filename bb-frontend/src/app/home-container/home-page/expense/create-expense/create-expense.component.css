@@ -1,7 +1,5 @@
 /* Style for the form container */
 .expense-form-container {
-  width: 100%;
-  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -25,7 +23,7 @@ label {
 
 input[type="text"],
 input[type="number"] {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -52,6 +50,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
+  margin-right: 5px;
 }
 
 button:disabled {

@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SignUpDTO } from '../dtos/auth.dto';
 import { AuthService } from './auth.service';
 import { BudgetDTO } from '../dtos/budget.dto';
+import { ExpenseDTO } from '../dtos/expense.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,10 @@ export class SharedService {
     undefined
   );
 
+  private expensesSubject = new BehaviorSubject<ExpenseDTO[] | undefined>(
+    undefined
+  );
+
   constructor(private authService: AuthService) {
     this.authService.getUserProfile().subscribe((user) => {
       this.userProfileSubject.next(user);
@@ -22,6 +27,10 @@ export class SharedService {
 
     this.authService.getBudgets().subscribe((budgets) => {
       this.budgetsSubject.next(budgets);
+    });
+
+    this.authService.getExpenses(null).subscribe((expenses) => {
+      this.expensesSubject.next(expenses.reverse());
     });
   }
 
@@ -39,5 +48,12 @@ export class SharedService {
 
   updateBudgets(newBudgets: BudgetDTO[]): void {
     this.budgetsSubject.next(newBudgets);
+  }
+
+  getExpenses(): Observable<ExpenseDTO[] | undefined> {
+    return this.expensesSubject.asObservable();
+  }
+  updateExpenses(newExpenses: ExpenseDTO[]): void {
+    this.expensesSubject.next(newExpenses);
   }
 }

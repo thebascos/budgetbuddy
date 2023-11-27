@@ -2,6 +2,7 @@ import {
   HttpClient,
   HttpClientModule,
   HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
@@ -93,5 +94,20 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.HttPClient.get<any>(`${this.url}/auth/budgets`, { headers });
+  }
+
+  getExpenses(budgetId: string | null): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    let params = new HttpParams();
+    if (budgetId) {
+      params = params.set('budgetId', budgetId);
+    }
+
+    return this.HttPClient.get<any>(`${this.url}/auth/expenses`, {
+      headers,
+      params,
+    });
   }
 }

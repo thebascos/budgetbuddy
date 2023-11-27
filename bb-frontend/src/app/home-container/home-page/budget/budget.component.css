@@ -6,9 +6,10 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 80%;
+  height: 70%;
   position: relative; /* Add this for relative positioning */
   font-family: Arial, sans-serif;
+  overflow-y: auto; /* Add scrollbars if content overflows */
 }
 .budget-button button {
   background-color: #2980b9;
@@ -30,12 +31,11 @@
   flex-direction: column; /* Stack cards vertically */
   align-items: center; /* Center cards horizontally */
   flex: 1; /* Grow to take the remaining space */
-  overflow-y: auto; /* Add scrollbars if content overflows */
   margin-top: 15px; /* Move the card container down */
 }
 
 .custom-card {
-  width: 700px;
+  width: 600px;
   height: 150px;
   margin: 10px 0; /* Adjust spacing between cards */
   padding: 20px;

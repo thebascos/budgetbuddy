@@ -6,6 +6,7 @@ import { DashboardComponent } from './home-container/home-page/dashboard/dashboa
 import { BudgetComponent } from './home-container/home-page/budget/budget.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { CreateExpenseComponent } from './home-container/home-page/expense/create-expense/create-expense.component';
+import { ExpenseComponent } from './home-container/home-page/expense/expense.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'budget', component: BudgetComponent },
-      { path: 'expenses', component: CreateExpenseComponent },
+      { path: 'expenses', component: ExpenseComponent },
     ],
   },
 ];

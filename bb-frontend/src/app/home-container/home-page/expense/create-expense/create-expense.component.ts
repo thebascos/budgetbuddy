@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { BudgetDTO } from 'src/app/dtos/budget.dto';
 import { ExpenseDTO } from 'src/app/dtos/expense.dto';
 import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-create-expense',
@@ -17,7 +19,9 @@ export class CreateExpenseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService // Inject AuthService
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<CreateExpenseComponent>,
+    private sharedService: SharedService
   ) {
     this.expenseForm = this.fb.group({
       description: ['', Validators.required],
@@ -43,8 +47,14 @@ export class CreateExpenseComponent implements OnInit {
 
   onSubmit() {
     if (this.expenseForm.valid) {
-      // Handle form submission here
-      // You can send the data to your backend for further processing.
+      const expenseData = this.expenseForm.value;
+      this.authService.createExpense$(expenseData).subscribe(() => {
+        this.authService.getExpenses(null).subscribe((expenses) => {
+          this.sharedService.updateExpenses(expenses);
+        });
+        this.expenseForm.reset();
+        this.dialogRef.close();
+      });
     }
   }
 }

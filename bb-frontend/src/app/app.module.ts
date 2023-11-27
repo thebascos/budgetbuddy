@@ -27,6 +27,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { PieChartComponent } from './graph/pie-chart/pie-chart.component';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BudgetFilterPipe } from './pipe/budget-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,8 @@ import { MatMenuModule } from '@angular/material/menu';
     FileUploadComponent,
     ExpenseComponent,
     CreateExpenseComponent,
+    PieChartComponent,
+    BudgetFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +64,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatOptionModule,
     MatSelectModule,
     MatMenuModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

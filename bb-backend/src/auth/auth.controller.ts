@@ -7,6 +7,7 @@ import {
   Request,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDTO } from 'src/dtos/signup.dto';
@@ -81,5 +82,11 @@ export class AuthController {
       fileUrl,
       fileName: file.originalname,
     };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/expenses')
+  async getExpenses(@Query('budgetId') budgetId: string) {
+    return await this.authservice.getExpenses(budgetId);
   }
 }

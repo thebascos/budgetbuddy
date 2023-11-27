@@ -118,4 +118,18 @@ export class AuthService {
       throw error;
     }
   }
+
+  async getExpenses(budgetId: string | null) {
+    try {
+      const expenses = await this.prisma.expense.findMany({
+        include: {
+          budget: true,
+        },
+        where: budgetId ? { budgetId } : undefined,
+      });
+      return expenses;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
