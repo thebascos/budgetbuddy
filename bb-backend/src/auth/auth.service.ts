@@ -11,6 +11,7 @@ import { SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
+import { CreateBillDTO } from 'src/dtos/bills.dto';
 
 @Injectable()
 export class AuthService {
@@ -130,6 +131,38 @@ export class AuthService {
       return expenses;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async createBill(billData: CreateBillDTO, userId: string): Promise<any> {
+    try {
+      const newBill = await this.prisma.bill.create({
+        data: {
+          userId: userId,
+          biller: billData.biller,
+          amount: billData.amount,
+          isPaid: billData.isPaid,
+          dueDay: billData.dueDay,
+        },
+      });
+      return newBill;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getBills(userId: string) {
+    try {
+      const bills = await this.prisma.bill.findMany({
+        include: {
+          user: true,
+        },
+        where: {
+          userId: userId,
+        },
+      });
+      return bills;
+    } catch (error) {
+      throw new Error('Error in fetching budgets');
     }
   }
 }

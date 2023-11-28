@@ -31,6 +31,9 @@ import { PieChartComponent } from './graph/pie-chart/pie-chart.component';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BudgetFilterPipe } from './pipe/budget-filter.pipe';
+import { BillsComponent } from './home-container/home-page/bills/bills.component';
+import { CreateBillComponent } from './home-container/home-page/bills/create-bill/create-bill.component';
+import { BillFilterPipe } from './pipe/bill-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,9 @@ import { BudgetFilterPipe } from './pipe/budget-filter.pipe';
     CreateExpenseComponent,
     PieChartComponent,
     BudgetFilterPipe,
+    BillsComponent,
+    CreateBillComponent,
+    BillFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,7 @@ import { BudgetFilterPipe } from './pipe/budget-filter.pipe';
     MatMenuModule,
     FormsModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, BillFilterPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

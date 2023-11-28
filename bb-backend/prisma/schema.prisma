@@ -18,6 +18,7 @@ model User {
   email                     String @unique
   password                  String
   budgets                   Budget[]
+  bills                     Bill[]
 }
 
 
@@ -41,5 +42,17 @@ model Expense {
   attachment   String? // Field to store the attachment file path or URL
   budgetId     String
   budget       Budget   @relation(fields: [budgetId], references: [id])
+}
+
+model Bill {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  biller       String
+  amount       Float
+  dueDay      Int
+  isPaid       Boolean @default(false)
+  userId       String
+  user         User @relation(fields: [userId], references: [id])
 }
 

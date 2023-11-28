@@ -16,6 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateBillDTO } from 'src/dtos/bills.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -88,5 +89,17 @@ export class AuthController {
   @Get('/expenses')
   async getExpenses(@Query('budgetId') budgetId: string) {
     return await this.authservice.getExpenses(budgetId);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-bill')
+  createBill(@Body() billData: CreateBillDTO, @Request() req) {
+    return this.authservice.createBill(billData, req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/bills')
+  async getBills(@Request() req) {
+    return await this.authservice.getBills(req.user.id);
   }
 }

@@ -9,6 +9,7 @@ import { Observable, map } from 'rxjs';
 import { LogInDTO, SignUpDTO } from '../dtos/auth.dto';
 import { BudgetDTO } from '../dtos/budget.dto';
 import { ExpenseDTO } from '../dtos/expense.dto';
+import { CreateBillDTO } from '../dtos/bill.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -109,5 +110,22 @@ export class AuthService {
       headers,
       params,
     });
+  }
+
+  public createBill$(billData: CreateBillDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(`${this.url}/auth/create-bill`, billData, {
+      headers,
+    });
+  }
+
+  getBills(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.get<any>(`${this.url}/auth/bills`, { headers });
   }
 }
