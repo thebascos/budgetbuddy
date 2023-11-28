@@ -29,16 +29,6 @@ export class DashboardComponent implements OnInit {
     this.loadExpenses();
     this.loadBills();
   }
-
-  updatePieChart(pieData: { label: string; data: number }[]): void {
-    this.pieChartComponent.updateChart(pieData);
-  }
-  getTotalExpenses(): number {
-    return Object.values(this.totalExpensesByBudget).reduce(
-      (total, value) => total + value,
-      0
-    );
-  }
   loadBills() {
     this.authService.getBills().subscribe((bills) => {
       this.bills = bills;
