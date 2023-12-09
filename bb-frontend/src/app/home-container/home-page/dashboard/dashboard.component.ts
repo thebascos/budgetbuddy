@@ -111,14 +111,4 @@ export class DashboardComponent implements OnInit {
       });
     });
   }
-
-  updatePieChart(pieData: { label: string; data: number }[]): void {
-    this.pieChartComponent.updateChart(pieData);
-  }
-  getTotalExpenses(): number {
-    return Object.values(this.totalExpensesByBudget).reduce(
-      (total, value) => total + value,
-      0
-    );
-  }
 }

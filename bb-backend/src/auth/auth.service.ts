@@ -168,6 +168,37 @@ export class AuthService {
     }
   }
 
+  async updateExpense(expenseId: string, expense: ExpenseDTO): Promise<any> {
+    try {
+      const updatedExpense = await this.prisma.expense.update({
+        where: {
+          id: expenseId,
+        },
+        data: {
+          description: expense.description,
+          amount: expense.amount,
+          budgetId: expense.budgetId,
+        },
+      });
+      return updatedExpense;
+    } catch (error) {
+      throw new Error('Failed to update expense. Please try again later.');
+    }
+  }
+
+  async deleteExpense(expenseId: string): Promise<void> {
+    try {
+      await this.prisma.expense.delete({
+        where: {
+          id: expenseId,
+        },
+      });
+    } catch (error) {
+      console.error('Failed to delete expense:', error);
+      throw new Error('Failed to delete expense. Please try again later.');
+    }
+  }
+
   async createBill(billData: CreateBillDTO, userId: string): Promise<any> {
     try {
       const newBill = await this.prisma.bill.create({
