@@ -12,6 +12,7 @@ import { BillsComponent } from './home-container/home-page/bills/bills.component
 import { CreateIncomeComponent } from './home-container/home-page/income/create-income/create-income.component';
 import { IncomeComponent } from './home-container/home-page/income/income.component';
 
+
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {

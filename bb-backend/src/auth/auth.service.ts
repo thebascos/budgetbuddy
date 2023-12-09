@@ -137,7 +137,6 @@ export class AuthService {
       throw error;
     }
   }
-
   async updateExpense(expenseId: string, expense: ExpenseDTO): Promise<any> {
     try {
       const updatedExpense = await this.prisma.expense.update({

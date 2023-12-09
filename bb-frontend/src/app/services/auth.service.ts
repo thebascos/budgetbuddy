@@ -218,4 +218,19 @@ export class AuthService {
       }
     );
   }
+
+  getExpenses(budgetId: string | null): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    let params = new HttpParams();
+    if (budgetId) {
+      params = params.set('budgetId', budgetId);
+    }
+
+    return this.HttPClient.get<any>(`${this.url}/auth/expenses`, {
+      headers,
+      params,
+    });
+  }
 }
