@@ -271,6 +271,16 @@ export class AuthService {
       }
     );
   }
+  public resetBill$(billData: CreateBillDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.put<any>(`${this.url}/auth/reset-bill`, billData, {
+      headers,
+    });
+  }
 
   gmailSignUp$(googleResponse: any): Observable<any> {
     return this.HttPClient.post<{ access_token: string }>(
@@ -280,6 +290,23 @@ export class AuthService {
       map((response) => {
         return response.access_token;
       })
+    );
+  }
+
+  createCheckoutSession(bill: CreateBillDTO): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/create-checkout-session`,
+      bill,
+      {
+        headers,
+      }
     );
   }
 }
