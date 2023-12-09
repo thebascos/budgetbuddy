@@ -19,13 +19,16 @@ export class SharedService {
   private expensesSubject = new BehaviorSubject<ExpenseDTO[] | undefined>(
     undefined
   );
+  private deletedExpenseSubject = new BehaviorSubject<string | undefined>(
+    undefined
+  );
 
   constructor(private authService: AuthService) {
     this.authService.getUserProfile().subscribe((user) => {
       this.userProfileSubject.next(user);
     });
 
-    this.authService.getBudgets().subscribe((budgets) => {
+    this.authService.getBudgets(null).subscribe((budgets) => {
       this.budgetsSubject.next(budgets);
     });
 
@@ -56,4 +59,13 @@ export class SharedService {
   updateExpenses(newExpenses: ExpenseDTO[]): void {
     this.expensesSubject.next(newExpenses);
   }
+
+  getDeletedExpenseId(): Observable<string | undefined> {
+    return this.deletedExpenseSubject.asObservable();
+  }
+
+  setDeletedExpenseId(expenseId: string): void {
+    this.deletedExpenseSubject.next(expenseId);
+  }
+
 }

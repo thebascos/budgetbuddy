@@ -7,4 +7,6 @@ export interface ExpenseDTO {
   budgetId: string;
   budget: BudgetDTO;
   createdAt: Date;
+  id: string;
+
 }

@@ -14,7 +14,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class CreateExpenseComponent implements OnInit {
   expenseForm: FormGroup;
-  budgets?: BudgetDTO[]; // Define an array to store budgets
+  budgets?: BudgetDTO[];
   selectedBudget?: string;
 
   constructor(
@@ -36,14 +36,13 @@ export class CreateExpenseComponent implements OnInit {
   }
 
   loadBudgets() {
-    this.authService.getBudgets().subscribe((budgets: any) => {
+    this.authService.getBudgets(null).subscribe((budgets: any) => {
       this.budgets = budgets;
-      console.log(this.budgets);
     });
   }
-  onBudgetSelected(event: any) {
-    this.selectedBudget = event.value;
-  }
+  // onBudgetSelected(event: any) {
+  //   this.selectedBudget = event.value;
+  // }
 
   onSubmit() {
     if (this.expenseForm.valid) {

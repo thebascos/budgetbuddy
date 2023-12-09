@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateExpenseComponent } from './create-expense/create-expense.component';
 import { SharedService } from 'src/app/services/shared.service';
-import { ExpenseDTO } from 'src/app/dtos/expense.dto';
+import { EditExpenseDTO, ExpenseDTO } from 'src/app/dtos/expense.dto';
 import { BudgetDTO } from 'src/app/dtos/budget.dto';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-expense',
@@ -17,13 +18,12 @@ export class ExpenseComponent {
 
   constructor(
     private dialog: MatDialog,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.sharedService.getExpenses().subscribe((expenses) => {
-      this.expenses = expenses;
-    });
+    this.loadExpenses();
     this.sharedService.getBudgets().subscribe((budgets) => {
       this.budgets = budgets;
     });
@@ -46,5 +46,44 @@ export class ExpenseComponent {
       // Select the budget
       this.selectedBudgets.push(budgetId);
     }
+  }
+
+  enableEditMode(expense: ExpenseDTO): void {
+    expense.editing = true;
+  }
+
+  cancelEdit(expense: ExpenseDTO): void {
+    expense.editing = false;
+  }
+  loadExpenses() {
+    this.sharedService.getExpenses().subscribe((expenses) => {
+      this.expenses = expenses;
+    });
+  }
+
+  updateExpense(expense: ExpenseDTO): void {
+    this.authService
+      .updateExpense$(expense.id, {
+        description: expense.description,
+        amount: expense.amount,
+        budgetId: expense.budgetId,
+      })
+      .subscribe(
+        (updatedExpese) => {
+          expense.editing = false;
+          this.authService.getExpenses(null).subscribe((expenses) => {
+            this.sharedService.updateExpenses(expenses);
+          });
+        },
+        (error) => {
+          console.error('Failed to update:', error);
+        }
+      );
+  }
+
+  deleteExpense(expenseId: string) {
+    this.authService.deleteExpense$(expenseId).subscribe(() => {
+      this.loadExpenses();
+    });
   }
 }

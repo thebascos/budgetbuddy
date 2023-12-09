@@ -1,0 +1,39 @@
+<div class="bill-button" style="text-align: right">
+  <button (click)="openCreateBillDialog()" mat-button>Add Bill</button>
+</div>
+<div class="bill-parent">
+  <div>
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="showUnpaid" />
+        Unpaid Bills
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="showPaid" />
+        Paid Bills
+      </label>
+    </div>
+  </div>
+  <div class="card-container">
+    <mat-card
+      class="custom-card"
+      *ngFor="let bill of bills | billFilter : showUnpaid : showPaid"
+    >
+      <mat-card-content>
+        <span *ngIf="!bill.isPaid" style="color: red">
+          Due: {{ formatDueDate(bill.dueDay) }}
+        </span>
+        <h3>{{ bill.biller }}</h3>
+        <p>Amount: {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}</p>
+        <p *ngIf="bill.isPaid" style="color: red">PAID</p>
+        <button
+          *ngIf="!bill.isPaid"
+          class="bill-buttonn"
+          (click)="payForBill(bill)"
+        >
+          Pay
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

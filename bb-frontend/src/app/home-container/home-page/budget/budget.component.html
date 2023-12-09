@@ -6,6 +6,7 @@
     <mat-card class="custom-card" *ngFor="let budget of budgets">
       <mat-card-content>
         <h3>{{ budget.description }}</h3>
+        <p style="text-align: center">{{ budget.income.source }}</p>
         <p>
           Amount: {{ budget.amount | currency : "PHP" : "symbol" : "1.2-2" }}
         </p>

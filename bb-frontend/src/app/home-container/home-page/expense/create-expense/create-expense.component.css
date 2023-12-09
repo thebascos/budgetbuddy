@@ -41,7 +41,7 @@ mat-select {
 }
 
 /* Style for the submit button */
-button {
+.create-expense {
   background-color: #2980b9;
   color: #fff;
   padding: 10px 20px;

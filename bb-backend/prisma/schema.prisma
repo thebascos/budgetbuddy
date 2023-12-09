@@ -11,35 +11,62 @@ datasource db {
 }
 
 model User {
-  id                        String   @id @default(uuid())
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
-  name                      String
-  email                     String @unique
-  password                  String
-  budgets                   Budget[]
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  email     String   @unique
+  password  String
+  budgets   Budget[]
+  bills     Bill[]
+  income    Income[]
 }
 
-
 model Budget {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  description  String
-  amount       Float
-  userId       String
-  user         User @relation(fields: [userId], references: [id])
-  expenses                  Expense[]
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  description String
+  amount      Float
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  expenses    Expense[]
+  incomeId    String   
+  income      Income    @relation(fields: [incomeId], references: [id])
 }
 
 model Expense {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  description  String
-  amount       Float
-  attachment   String? // Field to store the attachment file path or URL
-  budgetId     String
-  budget       Budget   @relation(fields: [budgetId], references: [id])
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String
+  amount      Float
+  attachment  String? // Field to store the attachment file path or URL
+  budgetId    String
+  budget      Budget   @relation(fields: [budgetId], references: [id])
 }
 
+model Bill {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  biller    String
+  amount    Float
+  dueDay    Int
+  isPaid    Boolean  @default(false)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  dueMonth  Int      @default(0)
+}
+
+model Income {
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  source_account String
+  source         String
+  amount         Float
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  budget         Budget[]
+}

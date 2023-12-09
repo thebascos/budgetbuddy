@@ -29,7 +29,13 @@
       </mat-form-field>
     </div>
     <div class="form-group">
-      <button type="submit" [disabled]="!expenseForm.valid">Submit</button>
+      <button
+        class="create-expense"
+        type="submit"
+        [disabled]="!expenseForm.valid"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>

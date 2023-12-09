@@ -20,6 +20,19 @@
       placeholder="₱ 0 .00"
     />
   </div>
+  <div class="form-group">
+    <mat-label class="form-label">Source: </mat-label>
+    <select
+      class="form-input"
+      name="incomeId"
+      formControlName="incomeId"
+      required
+    >
+      <option *ngFor="let income of incomes" [value]="income.id">
+        {{ income.source }}
+      </option>
+    </select>
+  </div>
 
   <button type="submit" [disabled]="budgetForm.invalid" class="form-button">
     Submit

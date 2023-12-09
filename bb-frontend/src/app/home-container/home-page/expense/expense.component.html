@@ -2,7 +2,7 @@
   <button (click)="openCreateExpenseDialog()">Create Expense</button>
 </div>
 <div class="expense-container">
-  <div>
+  <div *ngIf="expenses !== undefined">
     <div *ngFor="let budget of budgets">
       <label>
         <input
@@ -20,11 +20,52 @@
       *ngFor="let expense of expenses | budgetFilter : selectedBudgets"
     >
       <mat-card-content>
-        <span> {{ expense.budget.description }}</span>
-        <h3>{{ expense.description }}</h3>
-        <p>
-          Amount: {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
-        </p>
+        <!-- Display mode -->
+        <div *ngIf="!expense.editing">
+          <p style="text-align: right">
+            {{ expense.createdAt | date : "MM/dd/yyyy" }}
+          </p>
+          <h3>{{ expense.description }}</h3>
+          <p>{{ expense.budget.description }}</p>
+          <p class="custom-card-amount">
+            Amount: {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+          </p>
+          <div>
+            <button class="edit-button" (click)="enableEditMode(expense)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              class="edit-button"
+              (click)="deleteExpense(expense.id)"
+              style="background-color: #c0392b"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Edit mode -->
+        <div *ngIf="expense.editing" class="edit-mode">
+          <input [(ngModel)]="expense.description" placeholder="Description" />
+          <input
+            [(ngModel)]="expense.amount"
+            placeholder="Amount"
+            type="number"
+          />
+          <select [(ngModel)]="expense.budgetId">
+            <option *ngFor="let budget of budgets" [value]="budget.id">
+              {{ budget.description }}
+            </option>
+          </select>
+          <div style="display: flex">
+            <button class="update-button" (click)="updateExpense(expense)">
+              Update
+            </button>
+            <button class="cancel-button" (click)="cancelEdit(expense)">
+              Cancel
+            </button>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

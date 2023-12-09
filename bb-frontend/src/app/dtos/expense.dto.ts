@@ -1,3 +1,6 @@
+
+import { Interaction } from 'chart.js';
+
 import { BudgetDTO } from './budget.dto';
 
 export interface ExpenseDTO {
@@ -7,4 +10,11 @@ export interface ExpenseDTO {
   budgetId: string;
   budget: BudgetDTO;
   createdAt: Date;
+  editing: boolean;
+  id: string;
+}
+export interface EditExpenseDTO {
+  description: string;
+  amount: number;
+  budgetId: string;
 }
