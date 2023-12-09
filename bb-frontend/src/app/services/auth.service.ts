@@ -186,17 +186,6 @@ export class AuthService {
       headers,
     });
   }
-  public resetBill$(billData: CreateBillDTO) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Authentication token not found.');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.HttPClient.put<any>(`${this.url}/auth/reset-bill`, billData, {
-      headers,
-    });
-  }
-
   getBills(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -270,6 +259,16 @@ export class AuthService {
         headers,
       }
     );
+  }
+  public resetBill$(billData: CreateBillDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.put<any>(`${this.url}/auth/reset-bill`, billData, {
+      headers,
+    });
   }
 
   gmailSignUp$(googleResponse: any): Observable<any> {
