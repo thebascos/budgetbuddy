@@ -1,4 +1,4 @@
-.bill-parent {
+.budget-parent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@
   font-family: Arial, sans-serif;
   overflow-y: auto; /* Add scrollbars if content overflows */
 }
-.bill-button button {
+.budget-button button {
   background-color: #2980b9;
   color: #fff;
   border: none;
@@ -22,7 +22,7 @@
   transition: background-color 0.2s;
 }
 
-.bill-button {
+.budget-button {
   align-self: flex-end; /* Align the button to the right */
 }
 
@@ -36,9 +36,9 @@
 
 .custom-card {
   width: 600px;
-  height: 200px;
+  height: 150px;
   margin: 10px 0; /* Adjust spacing between cards */
-  padding: 15px;
+  padding: 20px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -62,24 +62,15 @@
 
 .custom-card p {
   font-size: 1rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
   color: #555;
   text-align: right;
   align-self: flex-end;
 }
-.bill-buttonn {
-  background-color: #2980b9;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s; /* Added transition for hover effect */
 
-  /* Hover effect */
-  &:hover {
-    background-color: #1c6ca1;
-    transform: scale(1.05);
-  }
+.total-income {
+  position: absolute;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  font-size: 1.2rem;
+  color: #333;
 }

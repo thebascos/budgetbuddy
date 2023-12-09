@@ -9,6 +9,7 @@
   margin-top: 5px;
   overflow-y: auto; /* Add scrollbars if content overflows */
 }
+
 .expense-button button {
   background-color: #2980b9;
   color: #fff;
@@ -27,8 +28,8 @@
 }
 
 .custom-card {
-  width: 600px;
-  height: 150px;
+  width: 500px;
+  height: 250px;
   margin: 10px 0;
   padding: 15px;
   background-color: #fff;
@@ -46,16 +47,47 @@
 }
 
 .custom-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0;
   color: #333;
-  text-align: center;
 }
 
-.custom-card p {
+.custom-card-amount {
   font-size: 1rem;
-  margin-top: 3rem;
   color: #555;
   text-align: right;
   align-self: flex-end;
+}
+
+/* New styles for edit mode */
+.edit-mode {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-mode input,
+.edit-mode select {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.edit-button,
+.update-button,
+.cancel-button {
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.update-button {
+  background-color: #2980b9;
+}
+
+.cancel-button {
+  background-color: #c0392b; /* Cancel button color */
 }

@@ -8,8 +8,9 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { LogInDTO, SignUpDTO } from '../dtos/auth.dto';
 import { BudgetDTO } from '../dtos/budget.dto';
-import { ExpenseDTO } from '../dtos/expense.dto';
+import { EditExpenseDTO, ExpenseDTO } from '../dtos/expense.dto';
 import { CreateBillDTO } from '../dtos/bill.dto';
+import { CreateIncomeDTO } from '../dtos/income.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +76,26 @@ export class AuthService {
       }
     );
   }
+  public createIncome$(incomeData: CreateIncomeDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/create-income`,
+      incomeData,
+      {
+        headers,
+      }
+    );
+  }
+
+  getIncomes(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.get<any>(`${this.url}/auth/incomes`, { headers });
+  }
 
   public createExpense$(expenseData: ExpenseDTO) {
     const token = localStorage.getItem('token');
@@ -91,10 +112,18 @@ export class AuthService {
     );
   }
 
-  getBudgets(): Observable<any> {
+  getBudgets(incomeId: string | null): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.HttPClient.get<any>(`${this.url}/auth/budgets`, { headers });
+
+    let params = new HttpParams();
+    if (incomeId) {
+      params = params.set('incomeId', incomeId);
+    }
+    return this.HttPClient.get<any>(`${this.url}/auth/budgets`, {
+      headers,
+      params,
+    });
   }
 
   getExpenses(budgetId: string | null): Observable<any> {
@@ -112,6 +141,40 @@ export class AuthService {
     });
   }
 
+  updateExpense$(
+    expenseId: string,
+    updatedExpenseData: EditExpenseDTO
+  ): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('log out or something?');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.put<any>(
+      `${this.url}/auth/expense/${expenseId}`,
+      updatedExpenseData,
+      {
+        headers,
+      }
+    );
+  }
+
+  deleteExpense$(expenseId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('log out or something?');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.delete<any>(
+      `${this.url}/auth/expense/${expenseId}`,
+      {
+        headers,
+      }
+    );
+  }
+
   public createBill$(billData: CreateBillDTO) {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -122,10 +185,37 @@ export class AuthService {
       headers,
     });
   }
+  public resetBill$(billData: CreateBillDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.put<any>(`${this.url}/auth/reset-bill`, billData, {
+      headers,
+    });
+  }
 
   getBills(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.HttPClient.get<any>(`${this.url}/auth/bills`, { headers });
+  }
+
+  createCheckoutSession(bill: CreateBillDTO): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/create-checkout-session`,
+      bill,
+      {
+        headers,
+      }
+    );
   }
 }

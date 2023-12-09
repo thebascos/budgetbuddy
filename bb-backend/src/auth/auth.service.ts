@@ -12,6 +12,7 @@ import { LogInDTO } from 'src/dtos/login.dto';
 import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
 import { CreateBillDTO } from 'src/dtos/bills.dto';
+import { CreateIncomeDTO } from 'src/dtos/income.dto';
 
 @Injectable()
 export class AuthService {
@@ -80,6 +81,7 @@ export class AuthService {
           description: budget.description,
           amount: budget.amount,
           userId: userId,
+          incomeId: budget.incomeId,
         },
       });
       return newBudget;
@@ -88,14 +90,16 @@ export class AuthService {
     }
   }
 
-  async getBudgets(userId: string) {
+  async getBudgets(userId: string, incomeId: string) {
     try {
       const budgets = await this.prisma.budget.findMany({
         include: {
           user: true,
+          income: true,
         },
         where: {
           userId: userId,
+          incomeId: incomeId,
         },
       });
       return budgets;
@@ -134,6 +138,37 @@ export class AuthService {
     }
   }
 
+  async updateExpense(expenseId: string, expense: ExpenseDTO): Promise<any> {
+    try {
+      const updatedExpense = await this.prisma.expense.update({
+        where: {
+          id: expenseId,
+        },
+        data: {
+          description: expense.description,
+          amount: expense.amount,
+          budgetId: expense.budgetId,
+        },
+      });
+      return updatedExpense;
+    } catch (error) {
+      throw new Error('Failed to update expense. Please try again later.');
+    }
+  }
+
+  async deleteExpense(expenseId: string): Promise<void> {
+    try {
+      await this.prisma.expense.delete({
+        where: {
+          id: expenseId,
+        },
+      });
+    } catch (error) {
+      console.error('Failed to delete expense:', error);
+      throw new Error('Failed to delete expense. Please try again later.');
+    }
+  }
+
   async createBill(billData: CreateBillDTO, userId: string): Promise<any> {
     try {
       const newBill = await this.prisma.bill.create({
@@ -161,6 +196,67 @@ export class AuthService {
         },
       });
       return bills;
+    } catch (error) {
+      throw new Error('Error in fetching budgets');
+    }
+  }
+
+  async editBill(
+    billId: string,
+    updatedBillData: Partial<CreateBillDTO>,
+  ): Promise<CreateBillDTO> {
+    const existingBill = await this.prisma.bill.findUnique({
+      where: { id: billId },
+    });
+
+    if (!existingBill) {
+      return null;
+    }
+
+    // Update the existing invoice with the new data
+    const updatedBill = await this.prisma.bill.update({
+      where: { id: billId },
+      data: updatedBillData,
+    });
+
+    return updatedBill;
+  }
+
+  async createIncome(
+    incomeData: CreateIncomeDTO,
+    userId: string,
+  ): Promise<any> {
+    try {
+      const newIncome = await this.prisma.income.create({
+        data: {
+          source: incomeData.source,
+          source_account: incomeData.source_account,
+          amount: incomeData.amount,
+          userId: userId,
+        },
+      });
+      return newIncome;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getIncomes(userId: string) {
+    try {
+      const incomes = await this.prisma.income.findMany({
+        include: {
+          user: true,
+        },
+        where: {
+          userId: userId,
+        },
+      });
+
+      const totalIncomes = incomes.reduce(
+        (sum, income) => sum + income.amount,
+        0,
+      );
+      return { incomes, totalIncomes };
     } catch (error) {
       throw new Error('Error in fetching budgets');
     }

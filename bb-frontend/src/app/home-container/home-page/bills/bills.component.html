@@ -17,12 +17,22 @@
   <div class="card-container">
     <mat-card
       class="custom-card"
-      *ngFor="let bill of bills | billFilter : showPaid : showUnpaid"
+      *ngFor="let bill of bills | billFilter : showUnpaid : showPaid"
     >
       <mat-card-content>
-        <span style="color: red">Due: {{ formatDueDate(bill.dueDay) }}</span>
+        <span *ngIf="!bill.isPaid" style="color: red">
+          Due: {{ formatDueDate(bill.dueDay) }}
+        </span>
         <h3>{{ bill.biller }}</h3>
         <p>Amount: {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}</p>
+        <p *ngIf="bill.isPaid" style="color: red">PAID</p>
+        <button
+          *ngIf="!bill.isPaid"
+          class="bill-buttonn"
+          (click)="payForBill(bill)"
+        >
+          Pay
+        </button>
       </mat-card-content>
     </mat-card>
   </div>

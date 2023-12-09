@@ -14,13 +14,13 @@
   </div>
   <div class="category">
     <h2>Bills</h2>
-    <div *ngFor="let bill of bills">
+    <div *ngFor="let bill of filterBillsDueThisMonth()">
       <div class="bill-item">
-        <label>
-          <input type="checkbox" [(ngModel)]="bill.isDue" />
-          {{ bill.description }}:
+        <input type="checkbox" [(ngModel)]="bill.isPaid" disabled />
+        <p>{{ bill.biller }}</p>
+        <p>
           {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}
-        </label>
+        </p>
       </div>
     </div>
   </div>

@@ -34,6 +34,8 @@ import { BudgetFilterPipe } from './pipe/budget-filter.pipe';
 import { BillsComponent } from './home-container/home-page/bills/bills.component';
 import { CreateBillComponent } from './home-container/home-page/bills/create-bill/create-bill.component';
 import { BillFilterPipe } from './pipe/bill-filter.pipe';
+import { IncomeComponent } from './home-container/home-page/income/income.component';
+import { CreateIncomeComponent } from './home-container/home-page/income/create-income/create-income.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,8 @@ import { BillFilterPipe } from './pipe/bill-filter.pipe';
     BillsComponent,
     CreateBillComponent,
     BillFilterPipe,
+    IncomeComponent,
+    CreateIncomeComponent,
   ],
   imports: [
     BrowserModule,

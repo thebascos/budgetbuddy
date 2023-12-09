@@ -9,6 +9,8 @@ import { CreateExpenseComponent } from './home-container/home-page/expense/creat
 import { ExpenseComponent } from './home-container/home-page/expense/expense.component';
 import { CreateBillComponent } from './home-container/home-page/bills/create-bill/create-bill.component';
 import { BillsComponent } from './home-container/home-page/bills/bills.component';
+import { CreateIncomeComponent } from './home-container/home-page/income/create-income/create-income.component';
+import { IncomeComponent } from './home-container/home-page/income/income.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -22,6 +24,7 @@ const routes: Routes = [
       { path: 'budget', component: BudgetComponent },
       { path: 'expenses', component: ExpenseComponent },
       { path: 'bills', component: BillsComponent },
+      { path: 'income', component: IncomeComponent },
     ],
   },
 ];

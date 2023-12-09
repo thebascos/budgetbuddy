@@ -1,0 +1,39 @@
+<div class="expense-form-container">
+  <h2>Add Income</h2>
+  <form [formGroup]="incomeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="source">Source</label>
+      <input type="text" id="source" formControlName="source" />
+    </div>
+
+    <div class="form-group">
+      <mat-label>Source Account </mat-label>
+      <select name="source_account" formControlName="source_account" required>
+        <option *ngFor="let account of accounts" [value]="account">
+          {{ account }}
+        </option>
+      </select>
+    </div>
+    <div
+      class="form-group"
+      *ngIf="incomeForm.get('source_account')?.value === 'MANUAL'"
+    >
+      <label for="amount">Amount</label>
+      <input
+        type="number"
+        id="amount"
+        formControlName="amount"
+        placeholder="₱ 0 .00"
+      />
+    </div>
+    <div class="form-group">
+      <button
+        class="create-expense"
+        type="submit"
+        [disabled]="!incomeForm.valid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

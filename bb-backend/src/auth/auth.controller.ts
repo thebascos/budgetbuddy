@@ -8,6 +8,9 @@ import {
   UseInterceptors,
   UploadedFile,
   Query,
+  Put,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDTO } from 'src/dtos/signup.dto';
@@ -17,6 +20,8 @@ import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateBillDTO } from 'src/dtos/bills.dto';
+import { Stripe } from 'stripe';
+import { CreateIncomeDTO } from 'src/dtos/income.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -59,8 +64,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/budgets')
-  async getTickets(@Request() req) {
-    return await this.authservice.getBudgets(req.user.id);
+  async getTickets(@Request() req, @Query('incomeId') incomeId: string) {
+    return await this.authservice.getBudgets(req.user.id, incomeId);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -96,10 +101,89 @@ export class AuthController {
   createBill(@Body() billData: CreateBillDTO, @Request() req) {
     return this.authservice.createBill(billData, req.user.id);
   }
+  @UseGuards(AuthGuard('jwt'))
+  @Put('/expense/:id')
+  async updateExpense(
+    @Param('id') id: string,
+    @Body() expenseData: ExpenseDTO,
+  ): Promise<any> {
+    return this.authservice.updateExpense(id, expenseData);
+  }
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('/expense/:id')
+  async deleteExpense(@Param('id') id: string): Promise<void> {
+    this.authservice.deleteExpense(id);
+  }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/bills')
   async getBills(@Request() req) {
     return await this.authservice.getBills(req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Put('/reset-bill')
+  async resetBill(@Body() billData: CreateBillDTO) {
+    this.authservice.editBill(billData.id, {
+      isPaid: false,
+    });
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-checkout-session')
+  async createCheckoutSession(@Body() billData: CreateBillDTO) {
+    try {
+      // Initialize the Stripe client with your secret key
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2023-10-16',
+      });
+
+      // Create a Checkout Session with the invoice details
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'php',
+              product_data: {
+                name: billData.biller,
+              },
+              unit_amount: billData.amount * 100, // Convert the amount to cents
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:4200/home/bills',
+        cancel_url: 'http://localhost:4200/home/bills',
+      });
+
+      // Call the editInvoice service to update the invoice status to 'true'
+      // await this.authservice.createBill(billData, req.user.id);
+      const updatedBill = await this.authservice.editBill(billData.id, {
+        isPaid: true,
+      });
+
+      if (!updatedBill) {
+        return { error: 'Bill not found' };
+      }
+
+      return { checkoutSessionId: session.id };
+    } catch (error) {
+      console.error(error);
+      throw error; // Rethrow the error for proper error handling middleware to catch
+    }
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-income')
+  createIncome(@Body() incomeData: CreateIncomeDTO, @Request() req) {
+    return this.authservice.createIncome(incomeData, req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/incomes')
+  async getIncomes(@Request() req) {
+    return await this.authservice.getIncomes(req.user.id);
   }
 }
