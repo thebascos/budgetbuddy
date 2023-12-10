@@ -282,15 +282,4 @@ export class AuthService {
       })
     );
   }
-
-  // public signUp$(signUpDTO: SignUpDTO) {
-  //   return this.HttPClient.post<{ access_token: string }>(
-  //     `${this.url}/auth/signup`,
-  //     signUpDTO
-  //   ).pipe(
-  //     map((response) => {
-  //       return response.access_token;
-  //     })
-  //   );
-  // }
 }
