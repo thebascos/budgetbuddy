@@ -41,6 +41,7 @@ export class SavingPlanComponent {
 
   openCreateBudgetDialog(): void {
     const dialogRef = this.dialog.open(CreateSavingPlanComponent, {});
+    dialogRef.afterClosed();
   }
 
   toggleInlineInput(saving: CreateSavingDTO): void {

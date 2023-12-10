@@ -219,109 +219,37 @@ export class AuthService {
       }
     );
   }
-
-  getExpenses(budgetId: string | null): Observable<any> {
+  getSavings$(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    let params = new HttpParams();
-    if (budgetId) {
-      params = params.set('budgetId', budgetId);
-    }
-
-    return this.HttPClient.get<any>(`${this.url}/auth/expenses`, {
+    return this.HttPClient.get<any>(`${this.url}/auth/savings`, {
       headers,
-      params,
     });
   }
-
-  getExpenses(budgetId: string | null): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    let params = new HttpParams();
-    if (budgetId) {
-      params = params.set('budgetId', budgetId);
-    }
-
-    return this.HttPClient.get<any>(`${this.url}/auth/expenses`, {
-      headers,
-      params,
-    });
-  }
-
-  updateExpense$(
-    expenseId: string,
-    updatedExpenseData: EditExpenseDTO
-  ): Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('log out or something?');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    return this.HttPClient.put<any>(
-      `${this.url}/auth/expense/${expenseId}`,
-      updatedExpenseData,
-      {
-        headers,
-      }
-    );
-  }
-
-  deleteExpense$(expenseId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('log out or something?');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    return this.HttPClient.delete<any>(
-      `${this.url}/auth/expense/${expenseId}`,
-      {
-        headers,
-      }
-    );
-  }
-
-  public createBill$(billData: CreateBillDTO) {
+  public addSaving$(addSavingData: AddSavingDTO) {
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('Authentication token not found.');
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.HttPClient.post<any>(`${this.url}/auth/create-bill`, billData, {
-      headers,
-    });
-  }
-  public resetBill$(billData: CreateBillDTO) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Authentication token not found.');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.HttPClient.put<any>(`${this.url}/auth/reset-bill`, billData, {
-      headers,
-    });
-  }
-
-  getBills(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.HttPClient.get<any>(`${this.url}/auth/bills`, { headers });
-  }
-
-  createCheckoutSession(bill: CreateBillDTO): Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Authentication token not found.');
-    }
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this.HttPClient.post<any>(
-      `${this.url}/auth/create-checkout-session`,
-      bill,
+      `${this.url}/auth/add-saving`,
+      addSavingData,
+      {
+        headers,
+      }
+    );
+  }
+
+  public createSaving$(savingData: CreateSavingDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/create-saving`,
+      savingData,
       {
         headers,
       }

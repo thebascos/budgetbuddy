@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CreateIncomeDTO } from 'src/app/dtos/income.dto';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -16,7 +17,7 @@ export class CreateSavingPlanComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    // private dialogRef: MatDialogRef<CreateBudgetComponent>,
+    private dialogRef: MatDialogRef<CreateSavingPlanComponent>,
     private sharedService: SharedService
   ) {
     this.savingForm = this.formBuilder.group({
@@ -36,7 +37,7 @@ export class CreateSavingPlanComponent {
       const savingData = this.savingForm.value;
       this.authService.createSaving$(savingData).subscribe(() => {
         this.savingForm.reset();
-        // this.dialogRef.close();
+        this.dialogRef.close();
       });
     }
   }
