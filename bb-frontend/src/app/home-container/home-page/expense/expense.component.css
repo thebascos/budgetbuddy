@@ -9,6 +9,7 @@
   margin-top: 5px;
   overflow-y: auto; /* Add scrollbars if content overflows */
 }
+
 .expense-button button {
   background-color: #2980b9;
   color: #fff;

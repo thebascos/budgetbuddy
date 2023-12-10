@@ -12,6 +12,7 @@ import { SharedService } from '../../../services/shared.service';
 })
 export class BudgetComponent implements OnInit {
   budgets: BudgetDTO[] | undefined;
+  message = 'Expenses for this Budget already exceeded.';
 
   constructor(
     private dialog: MatDialog,

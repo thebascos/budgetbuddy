@@ -14,6 +14,7 @@
       </label>
     </div>
   </div>
+
   <div class="card-container">
     <mat-card
       class="custom-card"
@@ -41,6 +42,12 @@
             >
               <mat-icon>delete</mat-icon>
             </button>
+            <a
+              *ngIf="expense.attachment"
+              target="_blank"
+              [href]="expense.attachment"
+              ><mat-icon>download</mat-icon></a
+            >
           </div>
         </div>
 

@@ -1,6 +1,4 @@
-
 import { Interaction } from 'chart.js';
-
 import { BudgetDTO } from './budget.dto';
 
 export interface ExpenseDTO {
@@ -17,4 +15,9 @@ export interface EditExpenseDTO {
   description: string;
   amount: number;
   budgetId: string;
+}
+
+export interface FileData {
+  fileName: string;
+  fileUrl: string;
 }

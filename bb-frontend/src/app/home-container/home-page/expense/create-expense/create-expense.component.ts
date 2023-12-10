@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BudgetDTO } from 'src/app/dtos/budget.dto';
-import { ExpenseDTO } from 'src/app/dtos/expense.dto';
+import { ExpenseDTO, FileData } from 'src/app/dtos/expense.dto';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -55,5 +55,8 @@ export class CreateExpenseComponent implements OnInit {
         this.dialogRef.close();
       });
     }
+  }
+  onFileUploaded(fileData: FileData) {
+    this.expenseForm.controls['attachment'].setValue(fileData.fileUrl);
   }
 }

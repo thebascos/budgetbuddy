@@ -13,6 +13,7 @@ import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
 import { CreateBillDTO } from 'src/dtos/bills.dto';
 import { CreateIncomeDTO } from 'src/dtos/income.dto';
+import { AddSavingDTO, CreateSavingDTO } from 'src/dtos/saving.dto';
 
 @Injectable()
 export class AuthService {
@@ -74,7 +75,7 @@ export class AuthService {
     }
   }
 
-  async createBudget(budget: BudgetDTO, userId: 'sfdsdfsdfsd'): Promise<any> {
+  async createBudget(budget: BudgetDTO, userId: string): Promise<any> {
     try {
       const newBudget = await this.prisma.budget.create({
         data: {
@@ -84,9 +85,21 @@ export class AuthService {
           incomeId: budget.incomeId,
         },
       });
+
+      await this.prisma.income.update({
+        where: {
+          id: budget.incomeId,
+        },
+        data: {
+          amount: {
+            decrement: budget.amount,
+          },
+        },
+      });
+
       return newBudget;
     } catch (error) {
-      throw new Error('error siya kay bogo ka');
+      throw new Error('An error occurred: ' + error.message);
     }
   }
 
@@ -96,13 +109,22 @@ export class AuthService {
         include: {
           user: true,
           income: true,
+          expenses: true,
         },
         where: {
           userId: userId,
           incomeId: incomeId,
         },
       });
-      return budgets;
+
+      return Promise.all(
+        budgets.map(async (b) => {
+          return {
+            ...b,
+            totalExpenses: await this.calculateTotalExpenses(b.id),
+          };
+        }),
+      );
     } catch (error) {
       throw new Error('Error in fetching budgets');
     }
@@ -118,10 +140,24 @@ export class AuthService {
           budgetId: expenseData.budgetId,
         },
       });
+
       return newExpense;
     } catch (error) {
-      throw error;
+      console.error('Error creating expense:', error);
+      throw new Error('Failed to create expense. Please try again.'); // Adjust the error message as needed
     }
+  }
+
+  async calculateTotalExpenses(budgetId: string): Promise<number> {
+    const totalExpensesResult = await this.prisma.expense.aggregate({
+      where: {
+        budgetId: budgetId,
+      },
+      _sum: {
+        amount: true,
+      },
+    });
+    return totalExpensesResult._sum?.amount || 0;
   }
 
   async getExpenses(budgetId: string | null) {
@@ -137,6 +173,7 @@ export class AuthService {
       throw error;
     }
   }
+
   async updateExpense(expenseId: string, expense: ExpenseDTO): Promise<any> {
     try {
       const updatedExpense = await this.prisma.expense.update({
@@ -259,5 +296,102 @@ export class AuthService {
     } catch (error) {
       throw new Error('Error in fetching budgets');
     }
+  }
+
+  async createSaving(saving: CreateSavingDTO, userId: string): Promise<any> {
+    try {
+      const newSaving = await this.prisma.saving.create({
+        data: {
+          goal: saving.goal,
+          goal_amount: saving.goal_amount,
+          userId: userId,
+        },
+      });
+
+      // await this.prisma.income.update({
+      //   where: {
+      //     id: b.incomeId,
+      //   },
+      //   data: {
+      //     amount: {
+      //       decrement: budget.amount,
+      //     },
+      //   },
+      // });
+
+      return newSaving;
+    } catch (error) {
+      throw new Error('An error occurred: ' + error.message);
+    }
+  }
+  async getSavings(userId: string) {
+    try {
+      const savings = await this.prisma.saving.findMany({
+        include: {
+          user: true,
+        },
+        where: {
+          userId: userId,
+        },
+      });
+      return savings;
+    } catch (error) {
+      throw new Error('Error in fetching budgets');
+    }
+  }
+
+  async addSaving(addSavingData: AddSavingDTO): Promise<any> {
+    try {
+      const newAddSaving = await this.prisma.addSaving.create({
+        data: {
+          amount: addSavingData.amount,
+          savingId: addSavingData.savingId,
+          incomeId: addSavingData.incomeId,
+        },
+      });
+
+      // Calculate total amount for the specific savingId
+      const totalAmount = await this.calculateTotalAmount(
+        addSavingData.savingId,
+      );
+
+      await this.prisma.saving.update({
+        where: { id: addSavingData.savingId },
+        data: {
+          total: totalAmount,
+        },
+      });
+
+      await this.prisma.income.update({
+        where: {
+          id: addSavingData.incomeId,
+        },
+        data: {
+          amount: {
+            decrement: addSavingData.amount,
+          },
+        },
+      });
+
+      return newAddSaving;
+    } catch (error) {
+      console.error('Error creating expense:', error);
+      throw new Error(
+        'Failed to create expense. Please try again.\n' + error.stack,
+      );
+    }
+  }
+
+  async calculateTotalAmount(savingId: string): Promise<number> {
+    const totalAmountResult = await this.prisma.addSaving.aggregate({
+      where: {
+        savingId: savingId,
+      },
+      _sum: {
+        amount: true,
+      },
+    });
+
+    return totalAmountResult._sum?.amount || 0;
   }
 }

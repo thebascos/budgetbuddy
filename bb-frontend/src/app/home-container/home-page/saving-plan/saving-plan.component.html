@@ -1,0 +1,47 @@
+<div class="budget-button" style="text-align: right">
+  <button mat-button (click)="openCreateBudgetDialog()">
+    Create Savings Plan
+  </button>
+</div>
+<div class="budget-parent">
+  <div class="card-container">
+    <mat-card class="custom-card" *ngFor="let saving of savings">
+      <mat-card-content>
+        <h3>{{ saving.goal }}</h3>
+        <p>
+          Amount:
+          {{ saving.goal_amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        </p>
+        <p>
+          Savings:
+          {{ saving.total | currency : "PHP" : "symbol" : "1.2-2" }}
+        </p>
+        <button
+          class="form-button"
+          mat-button
+          (click)="toggleInlineInput(saving)"
+        >
+          {{ saving.showInlineInput ? "Cancel" : "Add Saving" }}
+        </button>
+
+        <div *ngIf="saving.showInlineInput">
+          <form [formGroup]="addSaving" (ngSubmit)="onSubmit(saving)">
+            <input
+              type="number"
+              matInput
+              formControlName="amount"
+              placeholder="Amount"
+              required
+            />
+            <select formControlName="incomeId">
+              <option *ngFor="let income of incomes" [value]="income.id">
+                {{ income.source }}
+              </option>
+            </select>
+            <button mat-button type="submit" class="form-button">Submit</button>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

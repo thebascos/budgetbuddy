@@ -20,19 +20,21 @@ model User {
   budgets   Budget[]
   bills     Bill[]
   income    Income[]
+  savings   Saving[]
 }
 
 model Budget {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  description String
-  amount      Float
-  userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  expenses    Expense[]
-  incomeId    String   
-  income      Income    @relation(fields: [incomeId], references: [id])
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  description   String
+  amount        Float
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  expenses      Expense[]
+  incomeId      String
+  income        Income    @relation(fields: [incomeId], references: [id])
+  totalExpenses Float     @default(0)
 }
 
 model Expense {
@@ -69,4 +71,27 @@ model Income {
   userId         String
   user           User     @relation(fields: [userId], references: [id])
   budget         Budget[]
+  add_saving    AddSaving[]
+}
+
+model Saving {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  goal        String
+  goal_amount Float
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  total       Float @default(0)
+  addSavings  AddSaving[]
+}
+model AddSaving {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  amount      Float
+  savingId      String
+  saving        Saving     @relation(fields: [savingId], references: [id])
+  incomeId      String
+  income        Income    @relation(fields: [incomeId], references: [id])
 }

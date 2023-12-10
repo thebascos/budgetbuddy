@@ -6,4 +6,5 @@ export interface BudgetDTO {
   id: string;
   incomeId: string;
   income: CreateIncomeDTO;
+  totalExpenses: number;
 }

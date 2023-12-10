@@ -22,7 +22,6 @@ export class CreateIncomeComponent {
       source: ['', Validators.required],
       source_account: ['', Validators.required],
       amount: [null],
-      incomeId: [null, Validators.required],
     });
   }
 

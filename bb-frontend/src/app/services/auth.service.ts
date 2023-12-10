@@ -11,6 +11,7 @@ import { BudgetDTO } from '../dtos/budget.dto';
 import { EditExpenseDTO, ExpenseDTO } from '../dtos/expense.dto';
 import { CreateBillDTO } from '../dtos/bill.dto';
 import { CreateIncomeDTO } from '../dtos/income.dto';
+import { AddSavingDTO, CreateSavingDTO } from '../dtos/saving.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -218,19 +219,40 @@ export class AuthService {
       }
     );
   }
-
-  getExpenses(budgetId: string | null): Observable<any> {
+  getSavings$(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    let params = new HttpParams();
-    if (budgetId) {
-      params = params.set('budgetId', budgetId);
-    }
-
-    return this.HttPClient.get<any>(`${this.url}/auth/expenses`, {
+    return this.HttPClient.get<any>(`${this.url}/auth/savings`, {
       headers,
-      params,
     });
+  }
+  public addSaving$(addSavingData: AddSavingDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/add-saving`,
+      addSavingData,
+      {
+        headers,
+      }
+    );
+  }
+
+  public createSaving$(savingData: CreateSavingDTO) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.HttPClient.post<any>(
+      `${this.url}/auth/create-saving`,
+      savingData,
+      {
+        headers,
+      }
+    );
   }
 }

@@ -1,0 +1,21 @@
+<form [formGroup]="savingForm" (ngSubmit)="onSubmit()" class="custom-dialog">
+  <header class="form-header">Create Saving Plan</header>
+  <div class="form-group">
+    <label for="goal" class="form-label">Goal: </label>
+    <input type="text" id="goal" formControlName="goal" class="form-input" />
+  </div>
+
+  <div class="form-group">
+    <label for="goal_amount" class="form-label">Goal Amount: </label>
+    <input
+      type="number"
+      id="goal_amount"
+      formControlName="goal_amount"
+      class="form-input"
+      placeholder="₱ 0 .00"
+    />
+  </div>
+  <button type="submit" [disabled]="savingForm.invalid" class="form-button">
+    Submit
+  </button>
+</form>
