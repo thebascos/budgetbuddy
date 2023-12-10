@@ -16,3 +16,8 @@ export interface EditExpenseDTO {
   amount: number;
   budgetId: string;
 }
+
+export interface FileData {
+  fileName: string;
+  fileUrl: string;
+}

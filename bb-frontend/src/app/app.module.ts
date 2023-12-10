@@ -36,6 +36,8 @@ import { CreateBillComponent } from './home-container/home-page/bills/create-bil
 import { BillFilterPipe } from './pipe/bill-filter.pipe';
 import { IncomeComponent } from './home-container/home-page/income/income.component';
 import { CreateIncomeComponent } from './home-container/home-page/income/create-income/create-income.component';
+import { SavingPlanComponent } from './home-container/home-page/saving-plan/saving-plan.component';
+import { CreateSavingPlanComponent } from './home-container/home-page/saving-plan/create-saving-plan/create-saving-plan.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,8 @@ import { CreateIncomeComponent } from './home-container/home-page/income/create-
     BillFilterPipe,
     IncomeComponent,
     CreateIncomeComponent,
+    SavingPlanComponent,
+    CreateSavingPlanComponent,
   ],
   imports: [
     BrowserModule,

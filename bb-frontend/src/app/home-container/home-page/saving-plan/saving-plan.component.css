@@ -36,7 +36,7 @@
 
 .custom-card {
   width: 600px;
-  height: 165px;
+  height: 200px;
   margin: 10px 0; /* Adjust spacing between cards */
   padding: 15px;
   background-color: #fff;
@@ -65,4 +65,14 @@
   color: #555;
   text-align: right;
   align-self: flex-end;
+}
+
+.form-button {
+  padding: 5px 5px;
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }

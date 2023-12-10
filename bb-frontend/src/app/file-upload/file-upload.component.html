@@ -18,7 +18,7 @@
     accept=".jpg, .jpeg, .png, .pdf"
   />
 
-  <button mat-raised-button (click)="onSubmit()">Upload</button>
+  <button type="button" (click)="onSubmit()">Upload</button>
 
   <div *ngIf="uploadProgress !== null" class="progress-indicator">
     <mat-progress-bar

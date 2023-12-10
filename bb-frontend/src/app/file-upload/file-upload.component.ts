@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { FileData } from '../dtos/expense.dto';
 
 @Component({
   selector: 'app-file-upload',
@@ -9,6 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./file-upload.component.css'],
 })
 export class FileUploadComponent {
+  @Output() fileUploaded = new EventEmitter<FileData>();
   fileName: string | null = null;
   selectedFile: File | null = null;
   uploadProgress: number | null = null;
@@ -42,6 +44,7 @@ export class FileUploadComponent {
           observe: 'events',
         })
         .subscribe((event) => {
+          console.log;
           if (event.type === HttpEventType.UploadProgress) {
             if (event.total) {
               this.uploadProgress = Math.round(
@@ -52,6 +55,10 @@ export class FileUploadComponent {
             this.selectedFile = null;
             this.fileName = null;
             this.uploadProgress = null;
+            if (event.body) {
+              console.log(event.body);
+              this.fileUploaded.emit(event.body);
+            }
           }
         });
     }

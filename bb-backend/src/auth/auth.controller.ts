@@ -22,6 +22,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateBillDTO } from 'src/dtos/bills.dto';
 import { Stripe } from 'stripe';
 import { CreateIncomeDTO } from 'src/dtos/income.dto';
+import { AddSavingDTO, CreateSavingDTO } from 'src/dtos/saving.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -185,5 +186,23 @@ export class AuthController {
   @Get('/incomes')
   async getIncomes(@Request() req) {
     return await this.authservice.getIncomes(req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/create-saving')
+  createSaving(@Body() savingData: CreateSavingDTO, @Request() req) {
+    return this.authservice.createSaving(savingData, req.user.id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/savings')
+  async getSavings(@Request() req) {
+    return await this.authservice.getSavings(req.user.is);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/add-saving')
+  AddSaving(@Body() addSavingData: AddSavingDTO) {
+    return this.authservice.addSaving(addSavingData);
   }
 }
