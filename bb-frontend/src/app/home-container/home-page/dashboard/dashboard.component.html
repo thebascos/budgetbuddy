@@ -10,7 +10,27 @@
     </p>
   </div>
   <div class="category">
-    <h2>Savings Plan</h2>
+    <h2>Total Net Income</h2>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+        height: 100px;
+        align-items: center;
+        color: white; /* Set text color to white for better visibility */
+        background: linear-gradient(
+          to right,
+          #3498db,
+          #34495e
+        ); /* Gradient from blue to dark blue */
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+      "
+    >
+      <p>{{ totalIncomes | currency : "PHP" : "symbol" : "1.2-2" }}</p>
+    </div>
   </div>
   <div class="category">
     <h2>Bills</h2>

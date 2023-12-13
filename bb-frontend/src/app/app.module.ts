@@ -38,6 +38,13 @@ import { IncomeComponent } from './home-container/home-page/income/income.compon
 import { CreateIncomeComponent } from './home-container/home-page/income/create-income/create-income.component';
 import { SavingPlanComponent } from './home-container/home-page/saving-plan/saving-plan.component';
 import { CreateSavingPlanComponent } from './home-container/home-page/saving-plan/create-saving-plan/create-saving-plan.component';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+  FacebookLoginProvider,
+} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { ProfileSettingsComponent } from './user/profile-settings/profile-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,8 +69,10 @@ import { CreateSavingPlanComponent } from './home-container/home-page/saving-pla
     CreateIncomeComponent,
     SavingPlanComponent,
     CreateSavingPlanComponent,
+    ProfileSettingsComponent,
   ],
   imports: [
+    SocialLoginModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -80,7 +89,33 @@ import { CreateSavingPlanComponent } from './home-container/home-page/saving-pla
     MatMenuModule,
     FormsModule,
   ],
-  providers: [DatePipe, BillFilterPipe],
+  providers: [
+    DatePipe,
+    BillFilterPipe,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '729116398527-a8vd2gvmp0fi1srm2julko51psshdob2.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '729116398527-a8vd2gvmp0fi1srm2julko51psshdob2.apps.googleusercontent.com'
+            ),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

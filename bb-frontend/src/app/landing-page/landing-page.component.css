@@ -1,8 +1,8 @@
 /* Header styles */
-body {
+/* body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling if necessary */
+  overflow-x: hidden; 
 }
 .header {
   height: 100vh;
@@ -23,6 +23,58 @@ body {
 }
 
 .auth p {
-  margin: 0; /* Remove default margin for <p> elements */
-  align-self: center; /* Center only the "or" element horizontally */
+  margin: 0; 
+  align-self: center; 
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.nav-div {
+  height: 50px;
+
+  margin-bottom: 10px;
+  background-color: #2a97bd;
+  display: flex;
+}
+ul {
+  list-style-type: none; /* Remove the default bullet point */
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+li {
+  padding: 12px;
+  font-size: 20px;
+  color: #344150;
+  font-family: Arial, sans-serif;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+a {
+  text-decoration: none; /* Remove the default underline */
+  color: #344150;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.landing {
+  display: flex;
+  justify-content: space-around;
+}
+.form {
+  margin-left: 50px;
+  width: 400px;
+  margin-bottom: 10px;
+}
+.logo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -8,3 +8,8 @@ export interface LogInDTO {
   email: string;
   password: string;
 }
+export interface GmailSignUpDTO {
+  email: string;
+  password: '123456';
+  name: string;
+}

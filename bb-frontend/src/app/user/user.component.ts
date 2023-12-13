@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 import { AuthService } from '../services/auth.service';
 import { SignUpDTO } from '../dtos/auth.dto';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 @Component({
   selector: 'app-user',
@@ -15,13 +17,15 @@ export class UserComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.sharedService.getUserProfile().subscribe(
       (user) => {
         this.user = user;
+        console.log(user);
       },
       (error) => {
         console.error('Error fetching user profile:', error);
@@ -38,7 +42,8 @@ export class UserComponent implements OnInit {
   }
 
   openSettings() {
-    // Implement your settings logic here
-    console.log('Settings clicked');
+    const dialogRef = this.dialog.open(ProfileSettingsComponent, {
+      // width: '400px',
+    });
   }
 }

@@ -1,20 +1,26 @@
+/* Updated Dashboard Content Styling */
 .dashboard-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Updated Category Styling */
 .category {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  border: 1px solid #eee;
+  padding: 1.5rem;
+  border: 2px solid #3498db; /* Blue border */
   width: 300px;
   height: 500px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background: linear-gradient(
+    135deg,
+    #2980b9,
+    #3498db
+  ); /* Gradient background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
   animation: scaleUp 0.3s ease-in-out;
@@ -22,7 +28,7 @@
 
 .category:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes scaleUp {
@@ -34,66 +40,106 @@
   }
 }
 
-.category h2 {
-  font-size: 1.2rem;
-  margin: 0;
-  color: #333;
+/* Updated Net Income Styling */
+.net-income {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 2px solid #27ae60; /* Green border for emphasis */
+  width: 300px;
+  height: 500px;
+  border-radius: 15px;
+  background: linear-gradient(
+    135deg,
+    #2ecc71,
+    #27ae60
+  ); /* Gradient background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  animation: scaleUp 0.3s ease-in-out;
 }
 
+.net-income:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Updated Category Header Styling */
+.category h2,
+.net-income h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #fff;
+}
+
+/* Updated Expenses Content Styling */
 .expenses-content {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .expenses-content p {
-  font-size: 1rem;
-  color: #555;
-  background-color: #e1f3f5;
-  padding: 0.5rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, color 0.3s ease;
   animation: fadeIn 0.5s ease;
 }
 
 .expenses-content p:hover {
-  background-color: #52b4c8;
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+/* Updated Pie Chart Styling */
 .pie-chart {
   display: flex;
   text-align: center;
   justify-content: center;
 }
-/* Styling for bill items */
+
+/* Updated Bill Item Styling */
 .bill-item {
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #ecf0f1; /* Light gray background */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
-/* Styling for checkboxes */
+.bill-item:hover {
+  background-color: #d2d7d3; /* Lighter gray on hover */
+}
+
+/* Updated Checkbox Styling */
 .bill-item input[type="checkbox"] {
   margin-right: 10px;
+  cursor: not-allowed; /* Disable checkbox cursor */
 }
 
-/* Styling for due bills */
+/* Updated Due Bill Styling */
 .bill-item.due {
-  color: #d9534f; /* Red color for due bills */
-  font-weight: bold;
+  color: #e74c3c; /* Red color for due bills */
 }
 
-/* Styling for not due bills */
+/* Updated Not Due Bill Styling */
 .bill-item.not-due {
-  color: #5bc0de; /* Blue color for not due bills */
-  font-weight: bold;
+  color: #3498db; /* Blue color for not due bills */
+}
+
+/* Additional Styling for Vibrant Colors */
+.expenses-content p.vibrant {
+  background-color: #f39c12; /* Orange color for vibrant expenses */
+  color: #fff;
+}
+
+.expenses-content p.vibrant:hover {
+  background-color: #d35400; /* Darker orange on hover */
 }

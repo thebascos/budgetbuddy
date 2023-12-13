@@ -13,6 +13,7 @@ import { CreateIncomeComponent } from './home-container/home-page/income/create-
 import { IncomeComponent } from './home-container/home-page/income/income.component';
 import { CreateSavingPlanComponent } from './home-container/home-page/saving-plan/create-saving-plan/create-saving-plan.component';
 import { SavingPlanComponent } from './home-container/home-page/saving-plan/saving-plan.component';
+import { ProfileSettingsComponent } from './user/profile-settings/profile-settings.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },

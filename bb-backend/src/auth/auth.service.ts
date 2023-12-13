@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -7,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import { SignUpDTO } from 'src/dtos/signup.dto';
+import { GmailSignUpDTO, SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { BudgetDTO } from 'src/dtos/budget.dto';
 import { ExpenseDTO } from 'src/dtos/expense.dto';
@@ -57,6 +58,67 @@ export class AuthService {
     });
 
     return newUser;
+  }
+  async updateUser(userId: string, user: SignUpDTO) {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException('User not found');
+    }
+    const emailExists = await this.prisma.user.findUnique({
+      where: { email: user.email },
+    });
+
+    if (emailExists && emailExists.id !== userId) {
+      throw new ConflictException('Email already exists');
+    }
+    if (user.name) {
+      existingUser.name = user.name;
+    }
+    if (user.email) {
+      existingUser.email = user.email;
+    }
+    if (user.password) {
+      existingUser.password = user.password;
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id: userId },
+      data: existingUser,
+    });
+
+    return updatedUser;
+  }
+  public async gmailSignUp(gmailSignUpDTO: GmailSignUpDTO): Promise<any> {
+    try {
+      // You may need to adjust this logic based on your Gmail sign-up requirements
+      // For example, you might want to check if the user already exists based on Gmail email
+      const existingUser = await this.prisma.user.findUnique({
+        where: { email: gmailSignUpDTO.email },
+      });
+
+      if (existingUser) {
+        // User with the same email already exists
+        return existingUser;
+      }
+
+      // Create a new user using Gmail sign-up details
+      const newUser = await this.prisma.user.create({
+        data: {
+          name: gmailSignUpDTO.name,
+          email: gmailSignUpDTO.email,
+          // You may want to set a default password or handle it differently
+          password: gmailSignUpDTO.password,
+        },
+      });
+
+      return newUser;
+    } catch (error) {
+      // Handle any errors during Gmail sign-up
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 
   public async validateUser(user: LogInDTO) {
