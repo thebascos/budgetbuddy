@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "e2e:open": "cypress open --config baseUrl=http://localhost:4200",
+    "e2e:run": "cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.12.0",
+    "typescript": "^5.9.3"
+  }
+}

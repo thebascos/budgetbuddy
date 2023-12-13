@@ -271,6 +271,7 @@ export class AuthService {
       }
     );
   }
+
   gmailSignUp$(googleResponse: any): Observable<any> {
     return this.HttPClient.post<{ access_token: string }>(
       `${this.url}/auth/gmail-signup`,

@@ -3,6 +3,11 @@
   text-align: left;
 }
 
+.sign-up {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
 .signup-title {
   font-family: var(--font-display);
   font-size: 26px;
@@ -19,6 +24,13 @@
 
 .field {
   margin-bottom: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .field-label {
@@ -43,6 +55,13 @@
   outline: none;
 }
 
+input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .field-input::placeholder {
   color: var(--text-muted);
 }
@@ -57,6 +76,21 @@
   padding: 13px;
   background: var(--accent-gold);
   color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  letter-spacing: 0.3px;
+  margin-top: 6px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
   border: none;
   border-radius: var(--radius-sm);
   font-family: var(--font-body);

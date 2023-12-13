@@ -14,7 +14,28 @@
   letter-spacing: -0.5px;
 }
 
+.budget-button {
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
 .btn-create {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.card-container {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -86,6 +107,17 @@
   border-radius: 20px;
   background: var(--accent-gold-dim);
   color: var(--accent-gold);
+}
+
+.custom-card {
+  width: 600px;
+  height: 180px;
+  margin: 10px 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 .item-card-body {
