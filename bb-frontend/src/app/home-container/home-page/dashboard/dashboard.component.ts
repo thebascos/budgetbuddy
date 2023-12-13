@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   budgets: BudgetDTO[] | undefined;
   totalExpensesByBudget: { [key: string]: number } = {};
   bills: CreateBillDTO[] | undefined;
+  totalIncomes: number = 0;
 
   @ViewChild(PieChartComponent) pieChartComponent!: PieChartComponent;
 
@@ -26,6 +27,9 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authService.getIncomes().subscribe((result) => {
+      this.totalIncomes = result.totalIncomes;
+    });
     this.loadExpenses();
     this.loadBills();
   }

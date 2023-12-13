@@ -1,18 +1,15 @@
-/* Style for the login form */
 .sign-up {
   text-align: center;
   font-family: Arial, sans-serif;
 }
 
-/* Style for the form groups (label + input) */
 .form-group {
   display: flex;
-  flex-direction: column; /* Stack label and input vertically */
-  align-items: center; /* Left-align label and input */
-  margin-bottom: 10px; /* Add spacing between form groups */
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* Style for inputs */
 input {
   width: 50%;
   padding: 10px;
@@ -20,7 +17,6 @@ input {
   border-radius: 4px;
 }
 
-/* Style for the "Log In" button */
 button {
   background-color: #3498db;
   color: white;
@@ -32,8 +28,7 @@ button {
   font-family: Arial, sans-serif;
 }
 
-/* Style for the error message */
 .error-message {
   color: red;
-  margin-top: 10px; /* Add spacing between error message and button */
+  margin-top: 10px;
 }

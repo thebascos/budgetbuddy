@@ -1,7 +1,7 @@
 <div class="user-container">
   <div class="user-info">
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item>Settings</button>
+      <button mat-menu-item (click)="openSettings()">Settings</button>
       <button mat-menu-item (click)="logOut()">Logout</button>
     </mat-menu>
 

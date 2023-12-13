@@ -1,5 +1,11 @@
 <div class="budget-button" style="text-align: right">
-  <button mat-button (click)="openCreateBudgetDialog()">Create Budget</button>
+  <button
+    style="margin-bottom: 5px"
+    mat-button
+    (click)="openCreateBudgetDialog()"
+  >
+    Create Budget
+  </button>
 </div>
 <div class="budget-parent">
   <div class="card-container">
@@ -9,6 +15,13 @@
         <p style="text-align: center">{{ budget.income.source }}</p>
         <p>
           Amount: {{ budget.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        </p>
+        <p *ngIf="budget.totalExpenses < budget.amount">
+          Remaining:
+          {{
+            budget.amount - budget.totalExpenses
+              | currency : "PHP" : "symbol" : "1.2-2"
+          }}
         </p>
         <p
           style="text-align: center; color: red"

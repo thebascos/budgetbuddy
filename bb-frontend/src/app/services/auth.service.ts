@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { LogInDTO, SignUpDTO } from '../dtos/auth.dto';
+import { GmailSignUpDTO, LogInDTO, SignUpDTO } from '../dtos/auth.dto';
 import { BudgetDTO } from '../dtos/budget.dto';
 import { EditExpenseDTO, ExpenseDTO } from '../dtos/expense.dto';
 import { CreateBillDTO } from '../dtos/bill.dto';
@@ -255,4 +255,42 @@ export class AuthService {
       }
     );
   }
+
+  editUser$(updatedUserData: SignUpDTO): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.HttPClient.put<any>(
+      `${this.url}/auth/update`,
+      updatedUserData,
+      {
+        headers,
+      }
+    );
+  }
+
+  gmailSignUp$(googleResponse: any): Observable<any> {
+    return this.HttPClient.post<{ access_token: string }>(
+      `${this.url}/auth/gmail-signup`,
+      googleResponse
+    ).pipe(
+      map((response) => {
+        return response.access_token;
+      })
+    );
+  }
+
+  // public signUp$(signUpDTO: SignUpDTO) {
+  //   return this.HttPClient.post<{ access_token: string }>(
+  //     `${this.url}/auth/signup`,
+  //     signUpDTO
+  //   ).pipe(
+  //     map((response) => {
+  //       return response.access_token;
+  //     })
+  //   );
+  // }
 }

@@ -11,9 +11,11 @@ import {
   Put,
   Param,
   Delete,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignUpDTO } from 'src/dtos/signup.dto';
+import { GmailSignUpDTO, SignUpDTO } from 'src/dtos/signup.dto';
 import { LogInDTO } from 'src/dtos/login.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { BudgetDTO } from 'src/dtos/budget.dto';
@@ -23,6 +25,7 @@ import { CreateBillDTO } from 'src/dtos/bills.dto';
 import { Stripe } from 'stripe';
 import { CreateIncomeDTO } from 'src/dtos/income.dto';
 import { AddSavingDTO, CreateSavingDTO } from 'src/dtos/saving.dto';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('auth')
 export class AuthController {
@@ -33,7 +36,33 @@ export class AuthController {
     @Body() signupDTO: SignUpDTO,
   ): Promise<{ access_token: string }> {
     const user = await this.authservice.addUser(signupDTO);
-    // const user = await this.authservice.validateUser(signupDTO);
+    const token = await this.authservice.generateToken(user);
+    return token;
+  }
+
+  @Post('/gmail-signup')
+  @HttpCode(HttpStatus.CREATED)
+  async gmailSignUp(
+    @Body() googleResponse: any,
+  ): Promise<{ access_token: string }> {
+    let gmailSignUpDTO: GmailSignUpDTO = {
+      name: '',
+      email: '',
+      password: '123456',
+    };
+
+    if (googleResponse.credential) {
+      const decodedToken = jwt.decode(googleResponse.credential, {
+        complete: true,
+      }) as { payload?: any };
+
+      if (decodedToken && decodedToken.payload) {
+        const { name, email } = decodedToken.payload;
+        gmailSignUpDTO = { name, email, password: '123456' };
+      }
+    }
+
+    const user = await this.authservice.gmailSignUp(gmailSignUpDTO);
     const token = await this.authservice.generateToken(user);
     return token;
   }
@@ -204,5 +233,15 @@ export class AuthController {
   @Post('/add-saving')
   AddSaving(@Body() addSavingData: AddSavingDTO) {
     return this.authservice.addSaving(addSavingData);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Put('/update')
+  async updateUser(
+    @Request() req,
+    @Body() editUserDTO: SignUpDTO,
+  ): Promise<{ message: string }> {
+    await this.authservice.updateUser(req.user.id, editUserDTO);
+    return { message: 'User information updated successfully' };
   }
 }

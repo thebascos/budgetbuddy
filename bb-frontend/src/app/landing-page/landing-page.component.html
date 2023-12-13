@@ -1,17 +1,38 @@
-<div class="header">
-  <div class="logo">
-    <section>
-      <img src="./assets/images/bb.png" style="height: 450px" />
-    </section>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    background-color: #5078e6;
+    height: 100vh;
+  "
+>
+  <div class="nav-div">
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </div>
-  <div class="auth">
-    <h2 style="color: black; font-family: Arial, sans-serif">
-      Hi buddy, welcome back
-    </h2>
-    <app-login></app-login>
-    <p style="margin-top: 50px; margin-bottom: 10px; color: gray">
-      ---------------or---------------
-    </p>
-    <app-signup></app-signup>
+  <div class="landing">
+    <div class="logo">
+      <h3
+        style="font-size: 50px; font-family: Arial, sans-serif; color: #344150"
+      >
+        Welcome to
+      </h3>
+      <section>
+        <img src="./assets/images/bb.png" style="height: 400px" />
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; margin-top: 100px">
+      <app-login class="form"></app-login>
+      <p style="margin-left: 150px; color: #344150">or</p>
+      <div style="width: 500px">
+        <div style="margin-left: 50px">
+          <div id="buttonDiv" style="text-align: right"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
