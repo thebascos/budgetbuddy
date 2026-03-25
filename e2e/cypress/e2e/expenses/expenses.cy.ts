@@ -1,6 +1,6 @@
 describe("Expenses", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.login();
   });
 
   it("should display the expenses page", () => {

@@ -1,14 +1,18 @@
 /// <reference types="cypress" />
 
-// ***********************************************
-// This file is used to create custom commands and
-// overwrite existing commands.
-//
-// For more info on custom commands:
-// https://on.cypress.io/custom-commands
-// ***********************************************
+declare namespace Cypress {
+  interface Chainable {
+    login(): Chainable<void>;
+  }
+}
 
-// Example:
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', () => {
+  const email = Cypress.env('TEST_EMAIL');
+  const password = Cypress.env('TEST_PASSWORD');
 
-export {};
+  cy.visit('/');
+  cy.get('#loginEmail').type(email);
+  cy.get('#loginPassword').type(password);
+  cy.get('button[type="submit"]').contains('Log In').click();
+  cy.url().should('include', '/home/dashboard');
+});
