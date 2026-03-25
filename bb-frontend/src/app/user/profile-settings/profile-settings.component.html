@@ -1,11 +1,8 @@
-<div class="custom-dialog profile-settings-parent">
+<div class="custom-dialog">
   <h2 class="form-header">Edit Profile</h2>
-  <form
-    (ngSubmit)="onSubmit()"
-    class="profile-settings-parent-input form-group"
-  >
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <mat-label for="name" class="form-label">Name </mat-label>
+      <label for="name" class="form-label">Name</label>
       <input
         matInput
         type="text"
@@ -17,7 +14,7 @@
       />
     </div>
     <div class="form-group">
-      <mat-label for="email" class="form-label">Email </mat-label>
+      <label for="email" class="form-label">Email</label>
       <input
         matInput
         type="email"
@@ -30,7 +27,7 @@
       />
     </div>
     <div class="form-group">
-      <mat-label for="password" class="form-label">Password </mat-label>
+      <label for="password" class="form-label">Password</label>
       <input
         matInput
         type="password"
@@ -42,13 +39,9 @@
         readonly
       />
     </div>
-    <div class="form-group">
-      <div>
-        <button type="submit" mat-raised-button class="form-button">
-          Update
-        </button>
-      </div>
-      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-    </div>
+    <button type="submit" mat-raised-button class="form-button">
+      Update Profile
+    </button>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
   </form>
 </div>

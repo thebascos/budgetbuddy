@@ -1,34 +1,87 @@
-.sign-up {
-  text-align: center;
-  font-family: Arial, sans-serif;
+.signup-container {
+  font-family: var(--font-body);
+  text-align: left;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
+.signup-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px;
 }
 
-input {
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.signup-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 28px;
 }
 
-button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 15px;
+.field {
+  margin-bottom: 18px;
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.field-input::placeholder {
+  color: var(--text-muted);
+}
+
+.field-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-dim);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent-gold);
+  color: var(--bg-primary);
   border: none;
-  border-radius: 15px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  width: 50%;
-  font-family: Arial, sans-serif;
+  transition: background 0.2s ease, transform 0.15s ease;
+  letter-spacing: 0.3px;
+  margin-top: 6px;
+}
+
+.btn-primary:hover {
+  background: var(--accent-gold-light);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .error-message {
-  color: red;
-  margin-top: 10px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--accent-red-dim);
+  color: var(--accent-red);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
 }

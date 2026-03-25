@@ -1,69 +1,47 @@
-<div class="parent-container">
-  <div>
-    <div class="homepage-heading">
-      <img src="./assets/images/bb.png" style="height: 150px" />
-      <h2>Budget Buddy</h2>
-    </div>
-    <div>
-      <ul class="nav-list">
-        <!-- Dashboard Link with MatIcon -->
-        <div>
-          <li>
-            <a
-              [routerLink]="['/home/dashboard']"
-              routerLinkActive="active-link"
-            >
-              <mat-icon>dashboard</mat-icon>
-              Dashboard
-            </a>
-          </li>
-        </div>
-        <!-- Income Link with MatIcon -->
-        <div>
-          <li>
-            <a [routerLink]="['/home/income']" routerLinkActive="active-link">
-              <mat-icon>monetization_on</mat-icon>
-              Income
-            </a>
-          </li>
-        </div>
-        <!-- Budgets Link with MatIcon -->
-        <div>
-          <li>
-            <a [routerLink]="['/home/budget']" routerLinkActive="active-link">
-              <mat-icon>account_balance_wallet</mat-icon>
-              Budgets
-            </a>
-          </li>
-        </div>
-        <!-- Expenses Link with MatIcon -->
-        <div>
-          <li>
-            <a [routerLink]="['/home/expenses']" routerLinkActive="active-link">
-              <mat-icon>receipt</mat-icon>
-              Expenses
-            </a>
-          </li>
-        </div>
-        <!-- Savings Plan Link with MatIcon -->
-        <div>
-          <li>
-            <a [routerLink]="['/home/savings']" routerLinkActive="active-link">
-              <mat-icon>account_balance</mat-icon>
-              Savings Plan
-            </a>
-          </li>
-        </div>
-        <!-- Bills Link with MatIcon -->
-        <div>
-          <li>
-            <a [routerLink]="['/home/bills']" routerLinkActive="active-link">
-              <mat-icon>payment</mat-icon>
-              Bills
-            </a>
-          </li>
-        </div>
-      </ul>
-    </div>
+<div class="sidebar-inner">
+  <div class="sidebar-brand">
+    <img src="./assets/images/bb.png" class="sidebar-logo" alt="BudgetBuddy" />
+    <h2 class="sidebar-title">BudgetBuddy</h2>
   </div>
+
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li>
+        <a [routerLink]="['/home/dashboard']" routerLinkActive="nav-active">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/home/income']" routerLinkActive="nav-active">
+          <mat-icon>monetization_on</mat-icon>
+          <span>Income</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/home/budget']" routerLinkActive="nav-active">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>Budgets</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/home/expenses']" routerLinkActive="nav-active">
+          <mat-icon>receipt</mat-icon>
+          <span>Expenses</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/home/savings']" routerLinkActive="nav-active">
+          <mat-icon>account_balance</mat-icon>
+          <span>Savings Plan</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/home/bills']" routerLinkActive="nav-active">
+          <mat-icon>payment</mat-icon>
+          <span>Bills</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

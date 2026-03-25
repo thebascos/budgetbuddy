@@ -1,11 +1,13 @@
-<div class="flex-container">
-  <div class="app-homepage">
-    <app-home-page class="flex-item"></app-home-page>
-  </div>
-  <div class="router-outlet">
-    <div class="header">
+<div class="shell">
+  <aside class="sidebar">
+    <app-home-page></app-home-page>
+  </aside>
+  <div class="main-area">
+    <header class="topbar">
       <app-user></app-user>
-    </div>
-    <router-outlet class="flex-item"></router-outlet>
+    </header>
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
   </div>
 </div>

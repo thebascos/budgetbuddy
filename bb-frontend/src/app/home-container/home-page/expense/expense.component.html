@@ -1,79 +1,75 @@
-<div class="expense-button" style="text-align: right">
-  <button (click)="openCreateExpenseDialog()">Create Expense</button>
+<div class="page-header">
+  <h1 class="page-title">Expenses</h1>
+  <button class="btn-create" (click)="openCreateExpenseDialog()">
+    <mat-icon>add</mat-icon>
+    Create Expense
+  </button>
 </div>
-<div class="expense-container">
-  <div *ngIf="expenses !== undefined">
-    <div *ngFor="let budget of budgets">
-      <label>
-        <input
-          type="checkbox"
-          [checked]="selectedBudgets.includes(budget.id)"
-          (change)="toggleBudgetSelection(budget.id)"
-        />
-        {{ budget.description }}
-      </label>
-    </div>
+
+<div class="filter-bar" *ngIf="expenses !== undefined">
+  <span class="filter-label">Filter by budget:</span>
+  <div class="filter-chips">
+    <label class="filter-chip" *ngFor="let budget of budgets">
+      <input
+        type="checkbox"
+        [checked]="selectedBudgets.includes(budget.id)"
+        (change)="toggleBudgetSelection(budget.id)"
+      />
+      <span class="chip-text">{{ budget.description }}</span>
+    </label>
   </div>
+</div>
 
-  <div class="card-container">
-    <mat-card
-      class="custom-card"
-      *ngFor="let expense of expenses | budgetFilter : selectedBudgets"
-    >
-      <mat-card-content>
-        <!-- Display mode -->
-        <div *ngIf="!expense.editing">
-          <p style="text-align: right">
-            {{ expense.createdAt | date : "MM/dd/yyyy" }}
-          </p>
-          <h3>{{ expense.description }}</h3>
-          <p>{{ expense.budget.description }}</p>
-          <p class="custom-card-amount">
-            Amount: {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
-          </p>
-          <div>
-            <button class="edit-button" (click)="enableEditMode(expense)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              class="edit-button"
-              (click)="deleteExpense(expense.id)"
-              style="background-color: #c0392b"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-            <a
-              *ngIf="expense.attachment"
-              target="_blank"
-              [href]="expense.attachment"
-              ><mat-icon>download</mat-icon></a
-            >
-          </div>
+<div class="card-grid">
+  <div class="item-card"
+       *ngFor="let expense of expenses | budgetFilter : selectedBudgets; let i = index"
+       [style.animation-delay]="i * 60 + 'ms'">
+    <div *ngIf="!expense.editing">
+      <div class="item-card-top">
+        <span class="item-date">{{ expense.createdAt | date : "MMM d, yyyy" }}</span>
+        <div class="item-actions">
+          <button class="btn-icon" (click)="enableEditMode(expense)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="btn-icon btn-icon-danger" (click)="deleteExpense(expense.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <a *ngIf="expense.attachment" target="_blank" [href]="expense.attachment" class="btn-icon">
+            <mat-icon>download</mat-icon>
+          </a>
         </div>
+      </div>
+      <h3 class="item-title">{{ expense.description }}</h3>
+      <span class="item-badge">{{ expense.budget.description }}</span>
+      <div class="item-stat" style="margin-top: 16px">
+        <span class="item-stat-label">Amount</span>
+        <span class="item-stat-value">
+          {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        </span>
+      </div>
+    </div>
 
-        <!-- Edit mode -->
-        <div *ngIf="expense.editing" class="edit-mode">
-          <input [(ngModel)]="expense.description" placeholder="Description" />
-          <input
-            [(ngModel)]="expense.amount"
-            placeholder="Amount"
-            type="number"
-          />
-          <select [(ngModel)]="expense.budgetId">
-            <option *ngFor="let budget of budgets" [value]="budget.id">
-              {{ budget.description }}
-            </option>
-          </select>
-          <div style="display: flex">
-            <button class="update-button" (click)="updateExpense(expense)">
-              Update
-            </button>
-            <button class="cancel-button" (click)="cancelEdit(expense)">
-              Cancel
-            </button>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div *ngIf="expense.editing" class="edit-mode">
+      <div class="field">
+        <label class="field-label">Description</label>
+        <input [(ngModel)]="expense.description" placeholder="Description" class="field-input" />
+      </div>
+      <div class="field">
+        <label class="field-label">Amount</label>
+        <input [(ngModel)]="expense.amount" placeholder="Amount" type="number" class="field-input" />
+      </div>
+      <div class="field">
+        <label class="field-label">Budget</label>
+        <select [(ngModel)]="expense.budgetId" class="field-input">
+          <option *ngFor="let budget of budgets" [value]="budget.id">
+            {{ budget.description }}
+          </option>
+        </select>
+      </div>
+      <div class="edit-actions">
+        <button class="btn-create" (click)="updateExpense(expense)">Update</button>
+        <button class="btn-secondary" (click)="cancelEdit(expense)">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>

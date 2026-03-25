@@ -1,8 +1,8 @@
 <form [formGroup]="billForm" (ngSubmit)="onSubmit()" class="custom-dialog">
   <header class="form-header">Add Bill</header>
   <div class="form-group">
-    <label for="biller" class="form-label">Biller: </label>
-    <select name="biller" formControlName="biller" required>
+    <label for="biller" class="form-label">Biller</label>
+    <select name="biller" formControlName="biller" required class="form-input">
       <option *ngFor="let biller of listOfBillers" [value]="biller">
         {{ biller }}
       </option>
@@ -10,17 +10,18 @@
   </div>
 
   <div class="form-group">
-    <label for="amount" class="form-label">Amount: </label>
+    <label for="amount" class="form-label">Amount</label>
     <input
       type="number"
       id="amount"
       formControlName="amount"
       class="form-input"
-      placeholder="₱ 0 .00"
+      placeholder="0.00"
     />
   </div>
+
   <div class="form-group">
-    <label for="dueDay" class="form-label">Due Day: </label>
+    <label for="dueDay" class="form-label">Due Day</label>
     <select id="dueDay" formControlName="dueDay" class="form-input" required>
       <option *ngFor="let day of days" [value]="day">
         {{ day }}
@@ -29,6 +30,6 @@
   </div>
 
   <button type="submit" [disabled]="billForm.invalid" class="form-button">
-    Submit
+    Add Bill
   </button>
 </form>

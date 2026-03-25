@@ -1,93 +1,262 @@
-.expense-container {
+.page-header {
   display: flex;
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 70%;
-  font-family: Arial, sans-serif;
-  margin-top: 5px;
-  overflow-y: auto; /* Add scrollbars if content overflows */
-}
-
-.expense-button button {
-  background-color: #2980b9;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column; /* Stack cards vertically */
-  align-items: center; /* Center cards horizontally */
-  flex: 1; /* Grow to take the remaining space */
-}
-
-.custom-card {
-  width: 500px;
-  height: 250px;
-  margin: 10px 0;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 
-.custom-card:hover {
-  transform: scale(1.05);
-}
-
-.custom-card h3 {
-  font-size: 1.3rem;
+.page-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
-  color: #333;
+  letter-spacing: -0.5px;
 }
 
-.custom-card-amount {
-  font-size: 1rem;
-  color: #555;
-  text-align: right;
-  align-self: flex-end;
+.btn-create {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-/* New styles for edit mode */
+.btn-create mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.btn-create:hover {
+  background: var(--accent-gold-light);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+/* Filter */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--border-medium);
+}
+
+.filter-chip input[type="checkbox"] {
+  accent-color: var(--accent-gold);
+  width: 14px;
+  height: 14px;
+}
+
+.chip-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.item-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+.item-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.item-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-icon mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.btn-icon-danger:hover {
+  background: var(--accent-red-dim);
+  color: var(--accent-red);
+}
+
+.item-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.item-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--accent-gold-dim);
+  color: var(--accent-gold);
+}
+
+.item-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Edit mode */
 .edit-mode {
   display: flex;
   flex-direction: column;
+  gap: 14px;
 }
 
-.edit-mode input,
-.edit-mode select {
-  margin-bottom: 10px;
-  padding: 5px;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.edit-button,
-.update-button,
-.cancel-button {
-  background-color: #2980b9;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-right: 10px;
+.field-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
 }
 
-.update-button {
-  background-color: #2980b9;
+.field-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cancel-button {
-  background-color: #c0392b; /* Cancel button color */
+.field-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-dim);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
 }

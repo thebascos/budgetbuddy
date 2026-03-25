@@ -1,27 +1,20 @@
-<div class="expense-form-container">
-  <h2>Create Expense</h2>
+<div class="custom-dialog">
+  <h2 class="form-header">Create Expense</h2>
   <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="description">Description</label>
-      <input type="text" id="description" formControlName="description" />
+      <label for="description" class="form-label">Description</label>
+      <input type="text" id="description" formControlName="description" class="form-input" placeholder="What did you spend on?" />
     </div>
     <div class="form-group">
-      <label for="amount">Amount</label>
-      <input
-        type="number"
-        id="amount"
-        formControlName="amount"
-        placeholder="₱ 0 .00"
-      />
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" id="amount" formControlName="amount" class="form-input" placeholder="0.00" />
     </div>
     <div class="form-group">
-      <label for="file">File Attachment</label>
-      <app-file-upload
-        (fileUploaded)="onFileUploaded($event)"
-      ></app-file-upload>
+      <label class="form-label">Attachment</label>
+      <app-file-upload (fileUploaded)="onFileUploaded($event)"></app-file-upload>
     </div>
     <div class="form-group">
-      <mat-label>Budget</mat-label>
+      <label class="form-label">Budget</label>
       <mat-form-field>
         <mat-select formControlName="budgetId">
           <mat-option *ngFor="let budget of budgets" [value]="budget.id">
@@ -30,14 +23,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="form-group">
-      <button
-        class="create-expense"
-        type="submit"
-        [disabled]="!expenseForm.valid"
-      >
-        Submit
-      </button>
-    </div>
+    <button type="submit" [disabled]="!expenseForm.valid" class="form-button">
+      Create Expense
+    </button>
   </form>
 </div>

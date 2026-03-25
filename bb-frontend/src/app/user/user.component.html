@@ -1,24 +1,19 @@
 <div class="user-container">
-  <div class="user-info">
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="openSettings()">Settings</button>
-      <button mat-menu-item (click)="logOut()">Logout</button>
-    </mat-menu>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="openSettings()">Settings</button>
+    <button mat-menu-item (click)="logOut()">Logout</button>
+  </mat-menu>
 
-    <div class="user-details">
-      <div class="user-name">
-        <strong> {{ user?.name }} </strong>
-      </div>
-      <div
-        [matMenuTriggerFor]="userMenu"
-        aria-label="User Menu"
-        style="cursor: pointer"
-        class="user-avatar"
-      >
-        <div class="avatar-content">
-          {{ user?.name?.charAt(0)?.toUpperCase() }}
-        </div>
-      </div>
+  <div class="user-details">
+    <span class="user-name">{{ user?.name }}</span>
+    <div
+      [matMenuTriggerFor]="userMenu"
+      aria-label="User Menu"
+      class="user-avatar"
+    >
+      <span class="avatar-letter">
+        {{ user?.name?.charAt(0)?.toUpperCase() }}
+      </span>
     </div>
   </div>
 </div>

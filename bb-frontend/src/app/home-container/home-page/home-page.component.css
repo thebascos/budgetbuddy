@@ -1,50 +1,79 @@
-/* Style for the navigation links */
-.homepage-heading {
-  width: 100%;
-  display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: flex-start; /* Center horizontally */
-}
-.homepage-heading h2 {
-  color: #2980b9;
-  font-size: 27px;
-  font-family: Arial, sans-serif;
-}
-.parent-container {
-  height: 100%;
+.sidebar-inner {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
+  padding: 28px 20px;
 }
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  margin-bottom: 36px;
+}
+
+.sidebar-logo {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+}
+
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
 .nav-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.nav-list li {
-  margin-bottom: 10px; /* Add spacing between the links */
+.nav-list li a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
 }
 
-.nav-list a {
-  text-decoration: none; /* Remove underline from links */
-  font-size: 20px; /* Increase text size (adjust as needed) */
-  font-family: Arial, sans-serif; /* Use Arial and sans-serif font stack */
-  color: gray; /* Set link color to blue  */
-  display: flex; /* Add Flexbox to arrange icon and text horizontally */
-  align-items: center; /* Center vertically */
+.nav-list li a mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
 }
 
-.nav-list a mat-icon {
-  margin-right: 20px; /* Add space between icon and text */
+.nav-list li a:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.nav-list a.active-link {
-  font-weight: bold; /* Highlight the active link by making it bold */
-  color: #2980b9; /* Change link color on hover (optional) */
+.nav-list li a:hover mat-icon {
+  color: var(--text-secondary);
 }
 
-.nav-list a:hover {
-  color: #2980b9; /* Change link color on hover (optional) */
+.nav-list li a.nav-active {
+  color: var(--accent-gold);
+  background: var(--accent-gold-dim);
+  font-weight: 600;
 }
 
-/* Style for the user profile component within the footer */
+.nav-list li a.nav-active mat-icon {
+  color: var(--accent-gold);
+}
