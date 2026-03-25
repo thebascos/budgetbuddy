@@ -1,29 +1,40 @@
-.flex-container {
+.shell {
   display: flex;
   height: 100vh;
   width: 100%;
-  margin: 0;
+  background: var(--bg-primary);
 }
 
-.app-homepage {
-  flex: 1;
-  background-color: #252525;
-  padding: 20px;
-  margin: 0;
-}
-
-.router-outlet {
-  flex: 60%;
-  background-color: #ffffff;
-  padding: 20px;
-  margin: 0;
-}
-.header {
-  width: auto; /* Allow it to take the necessary width */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-subtle);
+  padding: 0;
   display: flex;
-  align-items: center; /* Center vertically */
+  flex-direction: column;
+  overflow-y: auto;
 }
-.header app-user {
-  margin-left: auto; /* Push app-user to the right by using auto margin on the left side */
-  margin-bottom: 5rem;
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-primary);
+}
+
+.content {
+  flex: 1;
+  padding: 36px;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease;
 }

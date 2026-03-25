@@ -1,38 +1,44 @@
-<div
-  style="
-    display: flex;
-    flex-direction: column;
-    background-color: #5078e6;
-    height: 100vh;
-  "
->
-  <div class="nav-div">
-    <ul>
+<div class="landing-wrapper">
+  <div class="landing-bg-grain"></div>
+
+  <nav class="landing-nav">
+    <div class="nav-brand">
+      <img src="./assets/images/bb.png" class="nav-logo" alt="BudgetBuddy" />
+      <span class="nav-title">BudgetBuddy</span>
+    </div>
+    <ul class="nav-links">
       <li><a href="#">About</a></li>
       <li><a href="#">Services</a></li>
       <li><a href="#">Contact</a></li>
     </ul>
-  </div>
-  <div class="landing">
-    <div class="logo">
-      <h3
-        style="font-size: 50px; font-family: Arial, sans-serif; color: #344150"
-      >
-        Welcome to
-      </h3>
-      <section>
-        <img src="./assets/images/bb.png" style="height: 400px" />
-      </section>
+  </nav>
+
+  <main class="landing-main">
+    <div class="landing-hero">
+      <p class="hero-eyebrow">Personal Finance, Simplified</p>
+      <h1 class="hero-title">
+        Take control of<br />
+        your <span class="hero-accent">money</span>.
+      </h1>
+      <p class="hero-subtitle">
+        Track expenses, manage budgets, and build savings with a tool that actually feels good to use.
+      </p>
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-top: 100px">
-      <app-login class="form"></app-login>
-      <p style="margin-left: 150px; color: #344150">or</p>
-      <div style="width: 500px">
-        <div style="margin-left: 50px">
-          <div id="buttonDiv" style="text-align: right"></div>
+    <div class="landing-auth">
+      <div class="auth-card">
+        <app-login class="auth-form"></app-login>
+        <div class="auth-divider">
+          <span class="divider-line"></span>
+          <span class="divider-text">or</span>
+          <span class="divider-line"></span>
+        </div>
+        <div class="google-btn-wrapper">
+          <div id="buttonDiv"></div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <div class="landing-glow"></div>
 </div>

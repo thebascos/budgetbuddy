@@ -1,27 +1,29 @@
 <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()" class="custom-dialog">
   <header class="form-header">Create Budget</header>
   <div class="form-group">
-    <label for="budgetDescription" class="form-label">Description: </label>
+    <label for="budgetDescription" class="form-label">Description</label>
     <input
       type="text"
       id="budgetDescription"
       formControlName="description"
       class="form-input"
+      placeholder="e.g. Groceries, Rent"
     />
   </div>
 
   <div class="form-group">
-    <label for="amount" class="form-label">Amount: </label>
+    <label for="amount" class="form-label">Amount</label>
     <input
       type="number"
       id="amount"
       formControlName="amount"
       class="form-input"
-      placeholder="₱ 0 .00"
+      placeholder="0.00"
     />
   </div>
+
   <div class="form-group">
-    <mat-label class="form-label">Source: </mat-label>
+    <label class="form-label">Income Source</label>
     <select
       class="form-input"
       name="incomeId"
@@ -35,6 +37,6 @@
   </div>
 
   <button type="submit" [disabled]="budgetForm.invalid" class="form-button">
-    Submit
+    Create Budget
   </button>
 </form>

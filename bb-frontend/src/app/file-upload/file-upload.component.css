@@ -1,0 +1,41 @@
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.upload-btn {
+  background: var(--accent-gold-dim) !important;
+  color: var(--accent-gold) !important;
+}
+
+button {
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--accent-gold-light);
+}
+
+.progress-indicator {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

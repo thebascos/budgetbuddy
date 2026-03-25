@@ -1,61 +1,76 @@
-/* Style for the form container */
-.expense-form-container {
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+.custom-dialog {
+  background: var(--bg-secondary);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
 }
 
-/* Style for form groups */
+.form-header {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 28px;
+}
+
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-label {
-  font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 5px;
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
 }
 
-input[type="text"],
-input[type="number"] {
-  width: 90%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Style for the file upload component (customize as needed) */
-app-file-upload {
-  /* Add styles for the file upload component */
+.form-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-dim);
 }
 
-/* Style for the mat-select (customize as needed) */
 mat-select {
   width: 100%;
 }
 
-/* Style for the submit button */
-.create-expense {
-  background-color: #2980b9;
-  color: #fff;
-  padding: 10px 20px;
+.form-button {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent-gold);
+  color: var(--bg-primary);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-right: 5px;
+  transition: background 0.2s ease, transform 0.15s ease;
+  margin-top: 10px;
 }
 
-button:disabled {
-  background-color: #ccc;
+.form-button:hover {
+  background: var(--accent-gold-light);
+  transform: translateY(-1px);
+}
+
+.form-button:disabled {
+  background: var(--text-muted);
   cursor: not-allowed;
+  transform: none;
 }
-
-/* Add additional styling for financial app elements as needed */

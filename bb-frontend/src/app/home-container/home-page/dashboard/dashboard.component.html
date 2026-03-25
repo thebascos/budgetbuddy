@@ -1,46 +1,46 @@
-<div class="dashboard-content">
-  <div class="category">
-    <h2>Expenses</h2>
+<div class="dashboard">
+  <div class="dash-card dash-expenses">
+    <div class="card-header">
+      <mat-icon class="card-icon">receipt</mat-icon>
+      <h2 class="card-title">Expenses</h2>
+    </div>
     <div class="pie-chart" *ngIf="budgets">
       <app-pie-chart></app-pie-chart>
     </div>
-    <p>
-      Total Expenses this Month:
-      {{ getTotalExpenses() | currency : "PHP" : "symbol" : "1.2-2" }}
-    </p>
-  </div>
-  <div class="category">
-    <h2>Total Net Income</h2>
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        margin-top: 70px;
-        height: 100px;
-        align-items: center;
-        color: white; /* Set text color to white for better visibility */
-        background: linear-gradient(
-          to right,
-          #3498db,
-          #34495e
-        ); /* Gradient from blue to dark blue */
-        border-radius: 10px;
-        font-size: 24px;
-        font-weight: bold;
-      "
-    >
-      <p>{{ totalIncomes | currency : "PHP" : "symbol" : "1.2-2" }}</p>
+    <div class="card-stat">
+      <span class="stat-label">Total this month</span>
+      <span class="stat-value">
+        {{ getTotalExpenses() | currency : "PHP" : "symbol" : "1.2-2" }}
+      </span>
     </div>
   </div>
-  <div class="category">
-    <h2>Bills</h2>
-    <div *ngFor="let bill of filterBillsDueThisMonth()">
-      <div class="bill-item">
-        <input type="checkbox" [(ngModel)]="bill.isPaid" disabled />
-        <p>{{ bill.biller }}</p>
-        <p>
+
+  <div class="dash-card dash-income">
+    <div class="card-header">
+      <mat-icon class="card-icon icon-teal">trending_up</mat-icon>
+      <h2 class="card-title">Total Net Income</h2>
+    </div>
+    <div class="income-display">
+      <span class="income-amount">
+        {{ totalIncomes | currency : "PHP" : "symbol" : "1.2-2" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="dash-card dash-bills">
+    <div class="card-header">
+      <mat-icon class="card-icon icon-amber">payment</mat-icon>
+      <h2 class="card-title">Upcoming Bills</h2>
+    </div>
+    <div class="bills-list">
+      <div class="bill-row" *ngFor="let bill of filterBillsDueThisMonth()">
+        <div class="bill-check">
+          <input type="checkbox" [(ngModel)]="bill.isPaid" disabled />
+        </div>
+        <span class="bill-name">{{ bill.biller }}</span>
+        <span class="bill-amount">
           {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}
-        </p>
+        </span>
       </div>
     </div>
   </div>

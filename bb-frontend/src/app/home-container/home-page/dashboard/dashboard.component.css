@@ -1,145 +1,145 @@
-/* Updated Dashboard Content Styling */
-.dashboard-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  font-family: var(--font-body);
 }
 
-/* Updated Category Styling */
-.category {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  border: 2px solid #3498db; /* Blue border */
-  width: 300px;
-  height: 500px;
-  border-radius: 15px;
-  background: linear-gradient(
-    135deg,
-    #2980b9,
-    #3498db
-  ); /* Gradient background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  animation: scaleUp 0.3s ease-in-out;
-}
-
-.category:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes scaleUp {
-  from {
-    transform: scale(0.8);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* Updated Net Income Styling */
-.net-income {
+.dash-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  border: 2px solid #27ae60; /* Green border for emphasis */
-  width: 300px;
-  height: 500px;
-  border-radius: 15px;
-  background: linear-gradient(
-    135deg,
-    #2ecc71,
-    #27ae60
-  ); /* Gradient background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  animation: scaleUp 0.3s ease-in-out;
+  animation: fadeInUp 0.5s ease both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.net-income:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.dash-card:nth-child(1) { animation-delay: 0s; }
+.dash-card:nth-child(2) { animation-delay: 0.1s; }
+.dash-card:nth-child(3) { animation-delay: 0.2s; }
+
+.dash-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
 }
 
-/* Updated Category Header Styling */
-.category h2,
-.net-income h2 {
-  font-size: 1.5rem;
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.card-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: var(--accent-gold);
+}
+
+.card-icon.icon-teal {
+  color: var(--accent-teal);
+}
+
+.card-icon.icon-amber {
+  color: var(--accent-gold-light);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
   margin: 0;
-  color: #fff;
 }
 
-/* Updated Expenses Content Styling */
-.expenses-content {
-  margin-bottom: 1.5rem;
-}
-
-.expenses-content p {
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  animation: fadeIn 0.5s ease;
-}
-
-.expenses-content p:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-/* Updated Pie Chart Styling */
+/* Expenses card */
 .pie-chart {
   display: flex;
-  text-align: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.card-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Income card */
+.income-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-/* Updated Bill Item Styling */
-.bill-item {
-  margin: 15px 0;
+.income-amount {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: -1px;
+}
+
+/* Bills card */
+.bills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bill-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #ecf0f1; /* Light gray background */
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  transition: background 0.2s ease;
 }
 
-.bill-item:hover {
-  background-color: #d2d7d3; /* Lighter gray on hover */
+.bill-row:hover {
+  background: var(--bg-card-hover);
 }
 
-/* Updated Checkbox Styling */
-.bill-item input[type="checkbox"] {
-  margin-right: 10px;
-  cursor: not-allowed; /* Disable checkbox cursor */
+.bill-check input[type="checkbox"] {
+  accent-color: var(--accent-gold);
+  width: 16px;
+  height: 16px;
+  cursor: not-allowed;
 }
 
-/* Updated Due Bill Styling */
-.bill-item.due {
-  color: #e74c3c; /* Red color for due bills */
+.bill-name {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
-/* Updated Not Due Bill Styling */
-.bill-item.not-due {
-  color: #3498db; /* Blue color for not due bills */
-}
-
-/* Additional Styling for Vibrant Colors */
-.expenses-content p.vibrant {
-  background-color: #f39c12; /* Orange color for vibrant expenses */
-  color: #fff;
-}
-
-.expenses-content p.vibrant:hover {
-  background-color: #d35400; /* Darker orange on hover */
+.bill-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }

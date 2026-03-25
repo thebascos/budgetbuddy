@@ -1,76 +1,126 @@
-.budget-parent {
+.page-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 70%;
-  position: relative; /* Add this for relative positioning */
-  font-family: Arial, sans-serif;
-  overflow-y: auto; /* Add scrollbars if content overflows */
-}
-.budget-button button {
-  background-color: #2980b9;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 
-.budget-button {
-  align-self: flex-end; /* Align the button to the right */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.5px;
 }
 
-.card-container {
+.btn-create {
   display: flex;
-  flex-direction: column; /* Stack cards vertically */
-  align-items: center; /* Center cards horizontally */
-  flex: 1; /* Grow to take the remaining space */
-  margin-top: 15px; /* Move the card container down */
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.custom-card {
-  width: 600px;
-  height: 150px;
-  margin: 10px 0; /* Adjust spacing between cards */
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+.btn-create mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.btn-create:hover {
+  background: var(--accent-gold-light);
+  transform: translateY(-1px);
+}
+
+/* Summary */
+.income-summary {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 28px;
+  text-align: center;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.summary-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: -1px;
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 16px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  animation: fadeInUp 0.4s ease both;
 }
 
-.custom-card:hover {
-  transform: scale(1.05);
+.item-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
 }
 
-.custom-card h3 {
-  font-size: 1.5rem;
+.item-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
   margin: 0;
-  color: #333;
-  text-align: center;
 }
 
-.custom-card p {
-  font-size: 1rem;
-  margin-top: 3rem;
-  color: #555;
-  text-align: right;
-  align-self: flex-end;
+.item-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.total-income {
-  position: absolute;
-  bottom: 20px; /* Adjust the distance from the bottom as needed */
-  font-size: 1.2rem;
-  color: #333;
+.item-stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.item-stat-value.value-positive {
+  color: var(--accent-teal);
 }
