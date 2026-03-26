@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Income</h1>
-  <button class="btn-create" mat-button (click)="openCreateBillDialog()">
+  <button class="btn-create" mat-button (click)="openCreateBillDialog()" >
     <mat-icon>add</mat-icon>
     Add Income
   </button>
@@ -9,18 +9,19 @@
 <div class="income-summary">
   <div class="summary-label">Total Income</div>
   <div class="summary-value">
-    {{ totalIncomes | currency : "PHP" : "symbol" : "1.2-2" }}
+    {{ totalIncomes | currency : currency : "symbol" : "1.2-2" }}
   </div>
 </div>
 
 <div class="card-grid">
   <div class="item-card" *ngFor="let income of incomes; let i = index"
-       [style.animation-delay]="i * 60 + 'ms'">
+       [style.animation-delay]="i * 60 + 'ms'"
+       aria-label="card">
     <h3 class="item-title">{{ income.source }}</h3>
     <div class="item-stat" *ngIf="income.source_account === 'MANUAL'">
       <span class="item-stat-label">Amount</span>
       <span class="item-stat-value value-positive">
-        {{ income.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ income.amount | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
   </div>

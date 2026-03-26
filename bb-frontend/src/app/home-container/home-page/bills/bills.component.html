@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Bills</h1>
-  <button class="btn-create" (click)="openCreateBillDialog()">
+  <button class="btn-create" (click)="openCreateBillDialog()" >
     <mat-icon>add</mat-icon>
     Add Bill
   </button>
@@ -21,7 +21,8 @@
 <div class="card-grid">
   <div class="item-card"
        *ngFor="let bill of bills | billFilter : showUnpaid : showPaid; let i = index"
-       [style.animation-delay]="i * 60 + 'ms'">
+       [style.animation-delay]="i * 60 + 'ms'"
+       aria-label="card">
     <div class="bill-status" *ngIf="!bill.isPaid">
       <span class="status-due">Due: {{ formatDueDate(bill.dueDay) }}</span>
     </div>
@@ -32,7 +33,7 @@
     <div class="item-stat">
       <span class="item-stat-label">Amount</span>
       <span class="item-stat-value">
-        {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ bill.amount | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
     <button

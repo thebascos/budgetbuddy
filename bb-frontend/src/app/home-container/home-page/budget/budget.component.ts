@@ -13,6 +13,7 @@ import { SharedService } from '../../../services/shared.service';
 export class BudgetComponent implements OnInit {
   budgets: BudgetDTO[] | undefined;
   message = 'Expenses for this Budget already exceeded.';
+  currency: string = 'EUR';
 
   constructor(
     private dialog: MatDialog,
@@ -21,6 +22,7 @@ export class BudgetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     this.sharedService.getBudgets().subscribe((budgets) => {
       this.budgets = budgets;
     });

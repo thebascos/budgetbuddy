@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Expenses</h1>
-  <button class="btn-create" (click)="openCreateExpenseDialog()">
+  <button class="btn-create" (click)="openCreateExpenseDialog()" >
     <mat-icon>add</mat-icon>
     Create Expense
   </button>
@@ -23,7 +23,8 @@
 <div class="card-grid">
   <div class="item-card"
        *ngFor="let expense of expenses | budgetFilter : selectedBudgets; let i = index"
-       [style.animation-delay]="i * 60 + 'ms'">
+       [style.animation-delay]="i * 60 + 'ms'"
+       aria-label="card">
     <div *ngIf="!expense.editing">
       <div class="item-card-top">
         <span class="item-date">{{ expense.createdAt | date : "MMM d, yyyy" }}</span>
@@ -44,7 +45,7 @@
       <div class="item-stat" style="margin-top: 16px">
         <span class="item-stat-label">Amount</span>
         <span class="item-stat-value">
-          {{ expense.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+          {{ expense.amount | currency : currency : "symbol" : "1.2-2" }}
         </span>
       </div>
     </div>

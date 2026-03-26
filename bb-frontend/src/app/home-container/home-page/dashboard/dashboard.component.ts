@@ -5,7 +5,7 @@ import { PieChartComponent } from 'src/app/graph/pie-chart/pie-chart.component';
 import { DatePipe } from '@angular/common';
 import { CreateBillDTO } from 'src/app/dtos/bill.dto';
 import { AuthService } from 'src/app/services/auth.service';
-import { getDate, getMonth, getYear } from 'date-fns'; // Import the necessary functions from date-fns
+import { getDate, getMonth, getYear } from 'date-fns';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   totalExpensesByBudget: { [key: string]: number } = {};
   bills: CreateBillDTO[] | undefined;
   totalIncomes: number = 0;
+  currency: string = 'EUR';
 
   @ViewChild(PieChartComponent) pieChartComponent!: PieChartComponent;
 
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     this.authService.getIncomes().subscribe((result) => {
       this.totalIncomes = result.totalIncomes;
     });

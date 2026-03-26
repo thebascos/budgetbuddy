@@ -21,6 +21,7 @@ export class BillsComponent implements OnInit {
   showUnpaid: boolean = true;
   showPaid: boolean = false;
   stripe!: Stripe;
+  currency: string = 'EUR';
 
   constructor(
     private dialog: MatDialog,
@@ -32,6 +33,7 @@ export class BillsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     const currentDay = getDate(new Date());
 
     this.authService.getBills().subscribe((bills) => {

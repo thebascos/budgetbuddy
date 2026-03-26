@@ -22,6 +22,9 @@ export class SharedService {
   private deletedExpenseSubject = new BehaviorSubject<string | undefined>(
     undefined
   );
+  private currencySubject = new BehaviorSubject<string>(
+    localStorage.getItem('selectedCurrency') || 'EUR'
+  );
 
   constructor(private authService: AuthService) {
     this.authService.getUserProfile().subscribe((user) => {
@@ -66,5 +69,18 @@ export class SharedService {
 
   setDeletedExpenseId(expenseId: string): void {
     this.deletedExpenseSubject.next(expenseId);
+  }
+
+  getCurrency(): Observable<string> {
+    return this.currencySubject.asObservable();
+  }
+
+  getCurrencyValue(): string {
+    return this.currencySubject.getValue();
+  }
+
+  setCurrency(currency: string): void {
+    localStorage.setItem('selectedCurrency', currency);
+    this.currencySubject.next(currency);
   }
 }
