@@ -23,6 +23,24 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  public async resetDatabase() {
+    await this.prisma.addSaving.deleteMany();
+    await this.prisma.saving.deleteMany();
+    await this.prisma.expense.deleteMany();
+    await this.prisma.budget.deleteMany();
+    await this.prisma.bill.deleteMany();
+    await this.prisma.income.deleteMany();
+    await this.prisma.user.deleteMany();
+
+    await this.prisma.user.create({
+      data: {
+        name: 'Test User',
+        email: 'test@gmail.com',
+        password: 'testtest',
+      },
+    });
+  }
+
   public async validateUserById(email: string) {
     const user = await this.prisma.user.findUnique({
       where: { email: email },

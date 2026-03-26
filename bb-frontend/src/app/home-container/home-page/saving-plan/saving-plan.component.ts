@@ -16,6 +16,7 @@ import { CreateIncomeDTO } from 'src/app/dtos/income.dto';
 export class SavingPlanComponent {
   savings: CreateSavingDTO[] | undefined;
   message = 'Expenses for this Budget already exceeded.';
+  currency: string = 'EUR';
   addSaving: FormGroup;
   incomes: CreateIncomeDTO[] | undefined;
   constructor(
@@ -31,6 +32,7 @@ export class SavingPlanComponent {
   }
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     this.authService.getSavings$().subscribe((savings) => {
       this.savings = savings;
     });

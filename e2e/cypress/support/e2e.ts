@@ -9,3 +9,4 @@
 // ***********************************************************
 
 import './commands';
+import './intercept-commands';

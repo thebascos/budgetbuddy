@@ -13,6 +13,7 @@ import { CreateIncomeComponent } from './create-income/create-income.component';
 export class IncomeComponent {
   incomes: CreateIncomeDTO[] | undefined;
   totalIncomes: number = 0;
+  currency: string = 'EUR';
 
   constructor(
     private dialog: MatDialog,
@@ -21,6 +22,7 @@ export class IncomeComponent {
   ) {}
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     this.authService.getIncomes().subscribe((result) => {
       this.incomes = result.incomes;
       this.totalIncomes = result.totalIncomes;
@@ -30,6 +32,13 @@ export class IncomeComponent {
   openCreateBillDialog(): void {
     const dialogRef = this.dialog.open(CreateIncomeComponent, {
       width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.authService.getIncomes().subscribe((result) => {
+        this.incomes = result.incomes;
+        this.totalIncomes = result.totalIncomes;
+      });
     });
   }
 }

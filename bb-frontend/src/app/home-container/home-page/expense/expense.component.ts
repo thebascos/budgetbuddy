@@ -15,6 +15,7 @@ export class ExpenseComponent {
   expenses: ExpenseDTO[] | undefined;
   budgets: BudgetDTO[] | undefined;
   selectedBudgets: string[] = [];
+  currency: string = 'EUR';
 
   constructor(
     private dialog: MatDialog,
@@ -23,6 +24,7 @@ export class ExpenseComponent {
   ) {}
 
   ngOnInit(): void {
+    this.sharedService.getCurrency().subscribe((c) => (this.currency = c));
     this.loadExpenses();
     this.sharedService.getBudgets().subscribe((budgets) => {
       this.budgets = budgets;

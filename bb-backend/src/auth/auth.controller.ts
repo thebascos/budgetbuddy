@@ -31,6 +31,12 @@ import * as jwt from 'jsonwebtoken';
 export class AuthController {
   constructor(private readonly authservice: AuthService) {}
 
+  @Post('/reset-db')
+  async resetDatabase() {
+    await this.authservice.resetDatabase();
+    return { message: 'Database reset successful' };
+  }
+
   @Post('/signup')
   async signup(
     @Body() signupDTO: SignUpDTO,

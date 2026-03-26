@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Budgets</h1>
-  <button class="btn-create" (click)="openCreateBudgetDialog()">
+  <button class="btn-create" (click)="openCreateBudgetDialog()" >
     <mat-icon>add</mat-icon>
     Create Budget
   </button>
@@ -8,7 +8,8 @@
 
 <div class="card-grid">
   <div class="item-card" *ngFor="let budget of budgets; let i = index"
-       [style.animation-delay]="i * 60 + 'ms'">
+       [style.animation-delay]="i * 60 + 'ms'"
+       aria-label="card">
     <div class="item-card-header">
       <h3 class="item-title">{{ budget.description }}</h3>
       <span class="item-badge">{{ budget.income.source }}</span>
@@ -17,13 +18,13 @@
       <div class="item-stat">
         <span class="item-stat-label">Amount</span>
         <span class="item-stat-value">
-          {{ budget.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+          {{ budget.amount | currency : currency : "symbol" : "1.2-2" }}
         </span>
       </div>
       <div class="item-stat" *ngIf="budget.totalExpenses <= budget.amount">
         <span class="item-stat-label">Remaining</span>
         <span class="item-stat-value value-positive">
-          {{ budget.amount - budget.totalExpenses | currency : "PHP" : "symbol" : "1.2-2" }}
+          {{ budget.amount - budget.totalExpenses | currency : currency : "symbol" : "1.2-2" }}
         </span>
       </div>
       <p class="item-warning" *ngIf="budget.totalExpenses > budget.amount">

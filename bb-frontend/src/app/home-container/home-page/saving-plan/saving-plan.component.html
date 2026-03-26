@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Savings Plan</h1>
-  <button class="btn-create" mat-button (click)="openCreateBudgetDialog()">
+  <button class="btn-create" mat-button (click)="openCreateBudgetDialog()" >
     <mat-icon>add</mat-icon>
     Create Savings Plan
   </button>
@@ -8,7 +8,8 @@
 
 <div class="card-grid">
   <div class="item-card" *ngFor="let saving of savings; let i = index"
-       [style.animation-delay]="i * 60 + 'ms'">
+       [style.animation-delay]="i * 60 + 'ms'"
+       aria-label="card">
     <h3 class="item-title">{{ saving.goal }}</h3>
 
     <div class="progress-section">
@@ -25,13 +26,13 @@
     <div class="item-stat">
       <span class="item-stat-label">Goal</span>
       <span class="item-stat-value">
-        {{ saving.goal_amount | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ saving.goal_amount | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
     <div class="item-stat">
       <span class="item-stat-label">Saved</span>
       <span class="item-stat-value value-positive">
-        {{ saving.total | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ saving.total | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
 

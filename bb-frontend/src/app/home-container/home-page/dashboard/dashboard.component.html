@@ -1,5 +1,5 @@
 <div class="dashboard">
-  <div class="dash-card dash-expenses">
+  <div class="dash-card dash-expenses" aria-label="dash-card">
     <div class="card-header">
       <mat-icon class="card-icon">receipt</mat-icon>
       <h2 class="card-title">Expenses</h2>
@@ -10,36 +10,36 @@
     <div class="card-stat">
       <span class="stat-label">Total this month</span>
       <span class="stat-value">
-        {{ getTotalExpenses() | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ getTotalExpenses() | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
   </div>
 
-  <div class="dash-card dash-income">
+  <div class="dash-card dash-income" aria-label="dash-card">
     <div class="card-header">
       <mat-icon class="card-icon icon-teal">trending_up</mat-icon>
       <h2 class="card-title">Total Net Income</h2>
     </div>
     <div class="income-display">
       <span class="income-amount">
-        {{ totalIncomes | currency : "PHP" : "symbol" : "1.2-2" }}
+        {{ totalIncomes | currency : currency : "symbol" : "1.2-2" }}
       </span>
     </div>
   </div>
 
-  <div class="dash-card dash-bills">
+  <div class="dash-card dash-bills" aria-label="dash-card">
     <div class="card-header">
       <mat-icon class="card-icon icon-amber">payment</mat-icon>
       <h2 class="card-title">Upcoming Bills</h2>
     </div>
     <div class="bills-list">
-      <div class="bill-row" *ngFor="let bill of filterBillsDueThisMonth()">
+      <div class="bill-row" *ngFor="let bill of filterBillsDueThisMonth()" aria-label="row">
         <div class="bill-check">
           <input type="checkbox" [(ngModel)]="bill.isPaid" disabled />
         </div>
         <span class="bill-name">{{ bill.biller }}</span>
         <span class="bill-amount">
-          {{ bill.amount | currency : "PHP" : "symbol" : "1.2-2" }}
+          {{ bill.amount | currency : currency : "symbol" : "1.2-2" }}
         </span>
       </div>
     </div>
